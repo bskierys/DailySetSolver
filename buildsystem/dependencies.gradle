@@ -1,4 +1,4 @@
-//apply from: 'buildsystem/git-version.gradle'
+apply from: 'buildsystem/git-version.gradle'
 
 allprojects {
     repositories {
@@ -10,10 +10,8 @@ allprojects {
 ext {
     //Android
     androidApplicationId = 'pl.ipebk.tabi'
-    //androidVersionCode = readVersionCode()
-    //androidVersionName = readVersionName()
-    androidVersionCode = 1
-    androidVersionName = "0.5"
+    androidVersionCode = readVersionCode()
+    androidVersionName = readVersionName()
     androidBuildToolsVersion = "25.0.2"
     androidMinSdkVersion = 16
     androidTargetSdkVersion = 25
