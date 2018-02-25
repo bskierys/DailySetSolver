@@ -1,0 +1,97 @@
+//apply from: 'buildsystem/git-version.gradle'
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://clojars.org/repo/" }
+    }
+}
+
+ext {
+    //Android
+    androidApplicationId = 'pl.ipebk.tabi'
+    //androidVersionCode = readVersionCode()
+    //androidVersionName = readVersionName()
+    androidVersionCode = 1
+    androidVersionName = "0.5"
+    androidBuildToolsVersion = "25.0.2"
+    androidMinSdkVersion = 16
+    androidTargetSdkVersion = 25
+    androidCompileSdkVersion = 25
+
+    //// Libraries
+    // Android
+    androidSupportVersion = '25.3.1'
+    databindingVersion = '2.3.3'
+    // RxJava
+    rxJavaVersion = '2.0.0'
+    rxAndroidVersion = '2.0.0'
+    rxBindingVersion = '2.1.1'
+    rxSchedulerRuleVersion = '1.0.2'
+    rxDelayVersion = '0.5.0'
+    // Dagger
+    daggerVersion = '2.8'
+    // Retrofit
+    retrofitVersion = '2.3.0'
+    okLogVersion = '1.0.1'
+    // Logs
+    loggingInterceptorVersion = '3.3.0'
+    pineVersion = '0.2.0'
+    timberUtilsVersion = '1.0.0'
+    crashlyticsVersion = '2.5.6@aar'
+    // Networking
+    picassoVersion = '2.5.2'
+    okhttpVersion = '3.6.0'
+    rxNetworkVersion = '0.7.0'
+    // Testing
+    junitVersion = '4.12'
+    mockitoTwoVersion = '2.2.26'
+    mockitoOneVersion = '1.10.19'
+
+    mobileDependencies = [
+            // Android
+            kotlin                  : "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+            appcompat               : "com.android.support:appcompat-v7:${androidSupportVersion}",
+            support                 : "com.android.support:support-v4:${androidSupportVersion}",
+            supportFragment         : "com.android.support:support-fragment:${androidSupportVersion}",
+            design                  : "com.android.support:design:${androidSupportVersion}",
+            recyclerView            : "com.android.support:recyclerview-v7:${androidSupportVersion}",
+
+            // RxJava
+            rxjava                  : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxandroid               : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            rxbinding               : "com.jakewharton.rxbinding2:rxbinding:${rxBindingVersion}",
+            rxSchedulerRule         : "com.github.Plastix.RxSchedulerRule:rx2:${rxSchedulerRuleVersion}",
+            rxDelay                 : "com.github.Plastix.RxDelay:rx2:${rxDelayVersion}",
+
+            // Dagger
+            daggerCompiler          : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger                  : "com.google.dagger:dagger:${daggerVersion}",
+
+            // Retrofit
+            retrofit                : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitConverter       : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            //retrofitRxAdapter       : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            retrofitRxAdapter       : "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0",
+            okLog                   : "com.github.simonpercic:oklog3:${okLogVersion}",
+            loggingInterceptor      : "com.squareup.okhttp3:logging-interceptor:${loggingInterceptorVersion}",
+
+            // logs
+            pine                    : "com.github.bskierys.pine:pine:${pineVersion}",
+            timbertreeutils         : "net.ypresto.timbertreeutils:timbertreeutils:${timberUtilsVersion}",
+            crashlytics             : "com.crashlytics.sdk.android:crashlytics:${crashlyticsVersion}",
+
+            // networking
+            picasso                 : "com.squareup.picasso:picasso:${picassoVersion}",
+            okhttp                  : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+            rxNetwork               : "com.github.pwittchen:reactivenetwork:${rxNetworkVersion}",
+
+            // databinding
+            databinding             : "com.android.databinding:compiler:${databindingVersion}",
+
+            // Unit test dependencies
+            junit                   : "junit:junit:${junitVersion}",
+            mockitoTwo              : "org.mockito:mockito-core:${mockitoTwoVersion}",
+            mockitoOne              : "org.mockito:mockito-core:${mockitoOneVersion}",
+    ]
+}
