@@ -1,6 +1,6 @@
 package pl.ipebk.solver
 
 /**
- * TODO: Generic description. Replace with real one.
+ * Representation of generic set feature
  */
-data class Feature(val featureId : Int, val value: Int)
+data class Feature internal constructor(val featureId : Int, val value: Int)
