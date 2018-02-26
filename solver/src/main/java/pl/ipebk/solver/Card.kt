@@ -29,4 +29,8 @@ class Card(vararg featureVariants: Int) {
     override fun hashCode(): Int {
         return features.hashCode()
     }
+
+    override fun toString(): String {
+        return "Card(features=$features)"
+    }
 }
