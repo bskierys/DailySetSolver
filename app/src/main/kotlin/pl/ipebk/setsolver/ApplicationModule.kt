@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.res.Resources
 import android.view.LayoutInflater
+import com.github.bskierys.pine.Pine
 import dagger.Module
 import dagger.Provides
 import timber.log.Timber
@@ -12,20 +13,29 @@ import javax.inject.Singleton
 @Module
 class ApplicationModule(private val app: KotlinBoilerplateApp) {
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     fun provideApplication(): Application = app
 
-    @Provides @Singleton @ApplicationQualifier
+    @Provides
+    @Singleton
+    @ApplicationQualifier
     fun provideContext(): Context = app.baseContext
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     fun provideResources(): Resources = app.resources
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     fun provideLayoutInflater(@ApplicationQualifier context: Context): LayoutInflater {
         return LayoutInflater.from(context)
     }
 
     @Provides
-    fun provideDebugTree(): Timber.DebugTree = Timber.DebugTree()
+    fun provideDebugTree(): Timber.DebugTree {
+        return Pine.Builder()
+                .addPackageReplacePattern(app.packageName, "SETAPP")
+                .grow()
+    }
 }
