@@ -1,23 +1,18 @@
-buildscript {
-    dependencies {
-        //noinspection GradleDynamicVersion
-        classpath "org.eclipse.jgit:org.eclipse.jgit:4.1.1.+"
+/*
+ * Gets the version name from the latest Git tag
+ */
+def getVersionName = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--tags'
+        standardOutput = stdout
     }
-    repositories {
-        jcenter()
-    }
+    return stdout.toString().trim()
 }
 
-import org.eclipse.jgit.api.Git
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder
-
-def git = Git.wrap(new FileRepositoryBuilder()
-        .readEnvironment()
-        .findGitDir()
-        .build())
-
 ext.readVersionCode = {
-    def describe = git.describe().setLong(true).call()
+    def describe = getVersionName().toString()
+    println("git describe: $describe")
     def tagName = describe.tokenize("-")[0]
     def tagNumber = tagName.replace("v","")
 
@@ -34,7 +29,7 @@ ext.readVersionCode = {
 }
 
 ext.readVersionName = {
-    def version = git.describe().setLong(true).call()
+    def version = getVersionName().toString()
     println("using version name: $version")
     return version
 }
