@@ -3,7 +3,6 @@ apply from: 'buildsystem/git-version.gradle'
 allprojects {
     repositories {
         jcenter()
-        maven { url "https://clojars.org/repo/" }
     }
 }
 
@@ -12,18 +11,18 @@ ext {
     androidApplicationId = 'pl.ipebk.tabi'
     androidVersionCode = readVersionCode()
     androidVersionName = readVersionName()
-    androidBuildToolsVersion = "25.0.2"
+    androidBuildToolsVersion = "27.0.3"
     androidMinSdkVersion = 16
-    androidTargetSdkVersion = 25
-    androidCompileSdkVersion = 25
+    androidTargetSdkVersion = 27
+    androidCompileSdkVersion = 27
 
     //// Libraries
     // Android
-    androidSupportVersion = '25.3.1'
+    androidSupportVersion = '27.0.2'
     databindingVersion = '2.3.3'
     // RxJava
-    rxJavaVersion = '2.0.0'
-    rxAndroidVersion = '2.0.0'
+    rxJavaVersion = '2.1.10'
+    rxAndroidVersion = '2.0.2'
     rxBindingVersion = '2.1.1'
     rxSchedulerRuleVersion = '1.0.2'
     rxDelayVersion = '0.5.0'
@@ -31,19 +30,17 @@ ext {
     daggerVersion = '2.8'
     // Retrofit
     retrofitVersion = '2.3.0'
-    okLogVersion = '1.0.1'
+    okLogVersion = '2.3.0'
     // Logs
-    loggingInterceptorVersion = '3.3.0'
     pineVersion = '0.2.0'
     timberUtilsVersion = '1.0.0'
-    crashlyticsVersion = '2.5.6@aar'
     // Networking
     picassoVersion = '2.5.2'
-    okhttpVersion = '3.6.0'
-    rxNetworkVersion = '0.7.0'
+    okhttpVersion = '3.9.1'
+    rxNetworkVersion = '0.12.3'
     // Testing
     junitVersion = '4.12'
-    mockitoTwoVersion = '2.2.26'
+    mockitoTwoVersion = '2.15.0'
     mockitoOneVersion = '1.10.19'
 
     mobileDependencies = [
@@ -69,20 +66,18 @@ ext {
             // Retrofit
             retrofit                : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitConverter       : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            //retrofitRxAdapter       : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
-            retrofitRxAdapter       : "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0",
-            okLog                   : "com.github.simonpercic:oklog3:${okLogVersion}",
-            loggingInterceptor      : "com.squareup.okhttp3:logging-interceptor:${loggingInterceptorVersion}",
+            retrofitRxAdapter       : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
 
             // logs
             pine                    : "com.github.bskierys.pine:pine:${pineVersion}",
             timbertreeutils         : "net.ypresto.timbertreeutils:timbertreeutils:${timberUtilsVersion}",
-            crashlytics             : "com.crashlytics.sdk.android:crashlytics:${crashlyticsVersion}",
 
             // networking
             picasso                 : "com.squareup.picasso:picasso:${picassoVersion}",
             okhttp                  : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
-            rxNetwork               : "com.github.pwittchen:reactivenetwork:${rxNetworkVersion}",
+            loggingInterceptor      : "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}",
+            okLog                   : "com.github.simonpercic:oklog3:${okLogVersion}",
+            rxNetwork               : "com.github.pwittchen:reactivenetwork-rx2:${rxNetworkVersion}",
 
             // databinding
             databinding             : "com.android.databinding:compiler:${databindingVersion}",

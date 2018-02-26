@@ -20,6 +20,7 @@ out/
 # Gradle files
 .gradle/
 build/
+**/build/
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -44,7 +45,7 @@ captures/
 
 # Keystore files
 *.jks
-signing.properties.sample
+buildsystem/signing.properties.sample
 
 ### Android Patch ###
 gen-external-apklibs

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt' // Use experimental kapt implementation
+apply plugin: 'kotlin-kapt'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -19,8 +19,6 @@ android {
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
         versionCode globalConfiguration.getAt("androidVersionCode")
         versionName globalConfiguration.getAt("androidVersionName")
-
-        // Enable VectorDrawableCompat for API < 21
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -67,8 +65,7 @@ android {
 
     lintOptions {
         warningsAsErrors false
-        abortOnError true // Fail early.
-
+        abortOnError true
         lintConfig file("lint.xml")
     }
 
@@ -80,13 +77,6 @@ android {
         }
     }
 }
-
-
-// Use for legacy kapt implementation
-// Required for annotation processing plugins like Dagger
-// kapt {
-//    generateStubs = true
-//}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -140,10 +130,9 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
-// Signing Config code
-// From https://gist.github.com/gabrielemariotti/6856974
+// Signing Config code. From https://gist.github.com/gabrielemariotti/6856974
 def Properties props = new Properties()
-def propFile = new File('signing.properties')
+def propFile = new File('dependencies/signing.properties')
 if (propFile.canRead()) {
     props.load(new FileInputStream(propFile))
 
