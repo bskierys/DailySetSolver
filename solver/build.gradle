@@ -1,0 +1,12 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    def mobileDependencies = rootProject.ext.mobileDependencies
+    compile mobileDependencies.kotlin
+
+    // assertion
+    testImplementation mobileDependencies.junit
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
