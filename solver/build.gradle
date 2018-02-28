@@ -1,8 +1,13 @@
 apply plugin: 'kotlin'
 
+sourceSets {
+    // Main source set is Kotlin!
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
 dependencies {
     def mobileDependencies = rootProject.ext.mobileDependencies
-    compile mobileDependencies.kotlin
+    implementation mobileDependencies.kotlin
 
     // assertion
     testImplementation mobileDependencies.junit
