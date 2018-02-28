@@ -80,6 +80,9 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(":solver")
+    compile project(":remote")
+    compile project(":domain")
     def mobileDependencies = rootProject.ext.mobileDependencies
 
     // Kotlin
