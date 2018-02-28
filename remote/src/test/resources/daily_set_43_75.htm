@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+  <TITLE>SET Daily Puzzle</TITLE>
+  <SCRIPT language="JavaScript" src="../javascript/Cookie.js"> </SCRIPT>  
+  <SCRIPT language="JavaScript" src="../javascript/ModelUtils.js"> </SCRIPT>  
+  <SCRIPT language="JavaScript" src="../javascript/Set.js"> </SCRIPT>  
+  <SCRIPT language="JavaScript" src="../javascript/SetCard.js"> </SCRIPT>  
+  <SCRIPT language="JavaScript" src="../javascript/SetBoard.js"> </SCRIPT>  
+  <SCRIPT language="JavaScript">  
+  var board = null;
+	var instructions = "../set/puzzle_instructions.htm";
+	var faq = "../set/puzzle_faq.htm";
+
+  
+  //***********************************************************************/
+  /**
+    * This is executed when the player has found all six sets.
+    * Although it will return a string of resulting page location, this 
+    * is not how the page is loaded. it is loaded though a call to window.location;
+    *
+    * @return a String of the linking page.(i believe this is necessary.
+    **/
+  function gameOver()  
+  { 
+    var URL = "http://www.setgame.com/you_completed_todays_puzzle?time=" + board.getElapsedTime();
+    window.top.location = URL;
+  }
+  //***********************************************************************/
+  function showScore(score)  
+  { 
+    if (document.card != null)
+   {
+      document.card.score.value = score;
+    }
+  }
+  //***********************************************************************/
+  function show(page)
+  {
+    var page = open(page, "PuzzleFrame", "scrollbars=yes,resizable=yes,toolbar=no,width=620,height=250");
+    page.focus();
+  }
+  //***********************************************************************/
+  function showTutorial()
+  {
+    var page = open("http://www.setgame.com/sites/default/files/tutorials/tutorial/SetTutorial.swf", "PuzzleFrame", "scrollbars=no,resizable=no,toolbar=no,width=604,height=404");
+	  page.focus();
+  }
+  //***********************************************************************/
+  function init()
+  {
+		try
+		{
+			window.document.setsFoundTab = window.document.getElementById("setsFoundTab");
+  	  board = new SetBoard(gameOver, showScore, window.document.getElementById("setsFound"));
+    	board.initSets(1 , 4 , 8 , 1 , 9 , 12 , 2 , 4 , 7 , 3 , 5 , 10 , 3 , 7 , 8 , 4 , 5 , 11);
+	    board.initSetCards(43,  33,  9,  67,  77,  61,  23,  10,  5,  37,  60,  75 );
+  	  //board.toggleSetsFound((Cookie_getCookieValue("ShowSetsFound") != "false"));
+			board.toggleSetsFound(true);
+		}
+		catch(e)
+		{
+			var platform = "\n on browser " + window.clientInformation.appName; 
+			platform = platform +	" version " + window.clientInformation.appVersion;
+      platform = platform +	" for " + window.clientInformation.platform;
+			alert("There is a technical problem with the Daily SET Puzzle.  We are aware of the error and are doing our best to fix it as quickly as possible. Thank you for your patience.");
+		}
+ }
+  //***********************************************************************/
+  function setAltText(set)
+  {
+    if (set)
+    {
+      board.syncCardImageNumber();
+      var i = board.imageOffset;
+            document.images[i++].alt = "1 Green Diamonds Striped ";
+            document.images[i++].alt = "3 Purple Squiggles Striped s";
+            document.images[i++].alt = "3 Green Squiggles Solid s";
+            document.images[i++].alt = "1 Purple Diamonds Empty ";
+            document.images[i++].alt = "2 Purple Ovals Empty s";
+            document.images[i++].alt = "1 Green Squiggles Empty ";
+            document.images[i++].alt = "2 Purple Ovals Solid s";
+            document.images[i++].alt = "1 Red Diamonds Solid ";
+            document.images[i++].alt = "2 Purple Squiggles Solid s";
+            document.images[i++].alt = "1 Red Diamonds Striped ";
+            document.images[i++].alt = "3 Purple Squiggles Empty s";
+            document.images[i++].alt = "3 Red Ovals Empty s";
+          }
+  }
+  //***********************************************************************/
+  //***********************************************************************/
+  
+</SCRIPT>
+<STYLE>
+	<!-- 
+	body A {font-family: verdana; font-size:10pt;} 
+	.body {
+	font-family: verdana;
+	font-size:10pt;
+	text-align: center;
+} 
+	//body,td,th {
+	color: #000;
+}
+#setsFoundTab table tr #setsFound {
+	background-color: #eceeee;
+	border-top-color: #CCCCCC;
+	border-right-color: #CCCCCC;
+	border-bottom-color: #CCCCCC;
+	border-left-color: #CCCCCC;
+}
+-->
+</STYLE>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</HEAD>
+<BODY bgcolor="#eceeee"  text="#505050" link="#eceeee" vlink="#eceeee" alink="#eceeee" onLoad="init();">
+<Center>
+
+<p>
+<font size="6" face="Verdana">Wednesday, February 28, 2018</font><br />
+<br />
+
+ <FORM name="card" method="post">
+ <table>
+  <tr>
+  <TD>
+  <table>
+    <tr> 
+      <td align="center"><a href="javascript:board.cardClicked(1)"  border="0"><img src="../images/setcards/small/43.gif" width="95" height="62" name="card1"></a></td> 
+      <td align="center"><a href="javascript:board.cardClicked(2)"  border="0"><img src="../images/setcards/small/33.gif" width="95" height="62"></a></td> 
+      <td align="center"><a href="javascript:board.cardClicked(3)"  border="0"><img src="../images/setcards/small/09.gif" width="95" height="62"></a></td> 
+      <td align="center"><a href="javascript:board.cardClicked(4)"  border="0"><img src="../images/setcards/small/67.gif" width="95" height="62"></a></td>
+    </tr> 
+    <tr> 
+      <td align="center"><input name="A1" type="checkbox" onclick="board.count()"></input></td> 
+      <td align="center"><input name="A2" type="checkbox" onclick="board.count()"></input></td> 
+      <td align="center"><input name="A3" type="checkbox" onclick="board.count()"></input></td> 
+      <td align="center"><input name="A4" type="checkbox" onclick="board.count()"></input></td>
+    </tr> 
+    <tr> 
+      <td align="center"><a href="javascript:board.cardClicked(5)"  border="0"><img src="../images/setcards/small/77.gif" width="95" height="62"></a></td> 
+      <td align="center"><a href="javascript:board.cardClicked(6)"  border="0"><img src="../images/setcards/small/61.gif" width="95" height="62"></a></td> 
+      <td align="center"><a href="javascript:board.cardClicked(7)"  border="0"><img src="../images/setcards/small/23.gif" width="95" height="62"></a></td> 
+      <td align="center"><a href="javascript:board.cardClicked(8)"  border="0"><img src="../images/setcards/small/10.gif" width="95" height="62"></a></td>
+    </tr> 
+    <tr> 
+      <td align="center"><input name="A5" type="checkbox" onclick="board.count()"></input></td> 
+      <td align="center"><input name="A6" type="checkbox" onclick="board.count()"></input></td> 
+      <td align="center"><input name="A7" type="checkbox" onclick="board.count()"></input></td> 
+      <td align="center"><input name="A8" type="checkbox" onclick="board.count()"></input></td>
+    </tr> 
+    <tr> 
+      <td align="center"><a href="javascript:board.cardClicked(9)"  border="0"><img src="../images/setcards/small/05.gif" width="95" height="62"></a></td> 
+      <td align="center"><a href="javascript:board.cardClicked(10)"  border="0"><img src="../images/setcards/small/37.gif" width="95" height="62"></a></td> 
+      <td align="center"><a href="javascript:board.cardClicked(11)"  border="0"><img src="../images/setcards/small/60.gif" width="95" height="62"></a></td> 
+      <td align="center"><a href="javascript:board.cardClicked(12)"  border="0"><img src="../images/setcards/small/75.gif" width="95" height="62"></a></td>
+    </tr> 
+    <tr> 
+      <td align="center"><input name="A9" type="checkbox" onclick="board.count()"></input></td> 
+      <td align="center"><input name="A10" type="checkbox" onclick="board.count()"></input></td> 
+      <td align="center"><input name="A11" type="checkbox" onclick="board.count()"></input></td> 
+      <td align="center"><input name="A12" type="checkbox" onclick="board.count()"></input></td>
+    </tr> 
+    <tr> 
+      <td colspan=4>
+				<table  border="0" width="100%">
+					<tr>
+						<td valign="top" align="left" class="body">
+		          	If you don&#39;t see the correct date above, REFRESH your browser.<br />
+								The puzzle is updated daily at 12:00 am PST.
+						</td>
+						<td valign="top" align="right"><input name="score" size="1"></td>
+						<td valign="top" align="middle">
+                          <p><A href="javascript:void(0);" onclick="board.toggleSetsFound(true);"><img src="../images/sets_found_button.gif"  border="0" name="setsFoundImage"></a><br />
+                            <br />
+                          <a href="http://www.setgame.com/set/puzzle_rules" target="_blank">SET Puzzle rules</a>
+                          </p></td>
+					</tr>
+				</TABLE>
+       
+ </td>
+    </tr> 
+	</TABLE>
+	</td>
+  <td id="setsFoundTab" valign="top">
+  <table>
+    <tr><td bgcolor="#eceeee" class="body"><A href='javascript:void(0)' onclick='board.toggleSetsFound(false)'><IMG  border='0' src='../images/x_button.gif' align='right'></a><em>SETs</em> Found:</td></tr>
+    <tr>
+			<td valign="top" bgcolor="#eceeee" id="setsFound">
+			<img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border-color=#000 border="1" class="body"><img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><br />
+			<img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><br />
+			<img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><br />
+			<img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><br />
+			<img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><br />
+			<img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><img src="../images/setcards/small/empty_card.gif" width="32" height="21"  border="1"><br />
+			</td>
+	</tr>
+	<tr>
+		<td valign="bottom" bgcolor="#eceeee"><a href="http://www.setgame.com/sites/default/files/tutorials/tutorial/SetTutorial.swf"></a>
+			<a target="_blank" href="http://www.setgame.com/sites/default/files/tutorials/tutorial/SetTutorial.swf">
+          <img border="0" src="../images/tutorial/flash_version/guy_learn_to_play.png" width="127" height="166"></a>
+		 </td>
+	</tr>
+<br />
+<br />
+	<tr><td align="center" bgcolor="63007d"><a href="http://www.setgame.com/set/puzzle_rules" target="_blank">SET Puzzle rules</a></td></tr>
+  </TABLE>
+  </td>
+  </tr>
+ </TABLE>
+ <table>
+	<tr>
+		<td align="left" valign="middle" bgcolor="63007d">
+  <a href="../puzzle/set_puzzle_yesterdays_solution.htm">Yesterday's Solution</a> 
+	</td>
+	</tr>
+	</table>
+</form>
+</center>
+<SCRIPT language="JavaScript">copyrightInfo("http://www.setgame.com","Return To The Set&reg; Homepage");</SCRIPT>
+<br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p>
+<br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p><br /><br /><p>
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    var pageTracker = _gat._getTracker("UA-4384385-1");
+    pageTracker._initData();
+    pageTracker._trackPageview();
+  </script>
+</body>
+</html>

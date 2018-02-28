@@ -1,0 +1,20 @@
+apply plugin: 'kotlin'
+
+sourceSets {
+    // Main source set is Kotlin!
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+dependencies {
+    def mobileDependencies = rootProject.ext.mobileDependencies
+    implementation project(":domain")
+    implementation mobileDependencies.kotlin
+    implementation mobileDependencies.rxjava
+    implementation mobileDependencies.jsoup
+
+    // assertion
+    testImplementation mobileDependencies.junit
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
