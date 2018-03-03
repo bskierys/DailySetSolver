@@ -1,57 +1,90 @@
 package pl.ipebk.setsolver.ui.solver
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import kotlinx.android.synthetic.main.activity_solver.*
-import pl.ipebk.setsolver.JobExecutor
+import kotlinx.android.synthetic.main.error_solver_layout.view.*
+import kotlinx.android.synthetic.main.solution_solver_layout.view.*
+import pl.ipebk.setsolver.ApplicationComponent
 import pl.ipebk.setsolver.R
-import pl.ipebk.setsolver.UiThread
+import pl.ipebk.setsolver.databinding.ActivitySolverBinding
 import pl.ipebk.setsolver.domain.SetCard
 import pl.ipebk.setsolver.domain.SetCardThreePack
 import pl.ipebk.setsolver.domain.SetSolution
-import pl.ipebk.setsolver.domain.interactor.FindDailySetSolution
-import pl.ipebk.setsolver.engine.CardMapperImpl
-import pl.ipebk.setsolver.engine.DailySetEngineImpl
-import pl.ipebk.setsolver.remote.DailySetApiService
-import pl.ipebk.setsolver.remote.DailySetRemoteImpl
-import pl.ipebk.setsolver.remote.mapper.DailySetEntityMapper
-import pl.ipebk.solver.SetGameSolver
+import pl.ipebk.setsolver.ui.base.ViewModelActivity
 
-class SolverActivity : AppCompatActivity() {
-  @BindView(R.id.container)
-  lateinit var container: LinearLayout
-
-  private val remote = DailySetRemoteImpl(DailySetApiService(), DailySetEntityMapper())
-  private val engine = DailySetEngineImpl(SetGameSolver(4, 3), CardMapperImpl())
-
-  private val findSolutionUseCase = FindDailySetSolution(engine, remote, JobExecutor(), UiThread())
+class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>() {
+  private val disposables: CompositeDisposable = CompositeDisposable()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_solver)
-    ButterKnife.bind(this)
+  }
 
+  override fun onBind() {
+    super.onBind()
+    binding.viewModel = viewModel
+
+    viewModel.fetchAndSolveDaily()
+
+    disposables.add(viewModel.getSolution().subscribe {
+      showSolutionLayout(it)
+    })
+
+    disposables.add(viewModel.loadingState().subscribe {
+      binding.loading.visibility = if (it) View.VISIBLE else View.INVISIBLE
+    })
+
+    disposables.add(viewModel.fetchErrors().subscribe {
+      showErrorState("Could not solve or download puzzle")
+    })
+
+    disposables.add(viewModel.networkErrors().subscribe {
+      showErrorState("Problem with Internet connection")
+    })
+  }
+
+  private fun showSolutionLayout(sets: SetSolution) {
     error.visibility = View.INVISIBLE
-    loading.visibility = View.VISIBLE
-    solution.visibility = View.INVISIBLE
+    loading.visibility = View.INVISIBLE
+    solution.visibility = View.VISIBLE
 
-    findSolutionUseCase.execute(DailyPuzzleSubscriber())
+    addSetsToLayout(sets)
+  }
+
+  private fun showErrorState(message: String) {
+    binding.error.visibility = View.VISIBLE
+    binding.loading.visibility = View.INVISIBLE
+    binding.solution.visibility = View.INVISIBLE
+
+    binding.error.error_message.text = message
   }
 
   override fun onDestroy() {
     super.onDestroy()
-    findSolutionUseCase.dispose()
+    disposables.dispose()
+  }
+
+  override fun injectDependencies(graph: ApplicationComponent) {
+    graph.plus(SolverModule(this)).injectTo(this)
+  }
+
+  override fun getViewBinding(): ActivitySolverBinding {
+    return DataBindingUtil.setContentView(this, R.layout.activity_solver)
   }
 
   private fun addSetsToLayout(solution: SetSolution) {
     solution.sets.forEach {
-      container.addView(getCardRow(it))
+      binding.solution.container.addView(getCardRow(it))
     }
   }
 
@@ -77,20 +110,5 @@ class SolverActivity : AppCompatActivity() {
     if (cardResId == 0) throw IllegalArgumentException("card: $cardName not found")
 
     return image
-  }
-
-  inner class DailyPuzzleSubscriber : DisposableSingleObserver<SetSolution>() {
-    override fun onSuccess(sets: SetSolution) {
-      error.visibility = View.INVISIBLE
-      loading.visibility = View.INVISIBLE
-      solution.visibility = View.VISIBLE
-      addSetsToLayout(sets)
-    }
-
-    override fun onError(e: Throwable) {
-      error.visibility = View.VISIBLE
-      loading.visibility = View.INVISIBLE
-      solution.visibility = View.INVISIBLE
-    }
   }
 }

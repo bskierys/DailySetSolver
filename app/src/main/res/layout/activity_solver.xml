@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.solver.SolverActivity">
+<layout>
+    <data>
 
-    <include
-        android:id="@+id/solution"
-        layout="@layout/solution_solver_layout"/>
+        <variable
+            name="viewModel"
+            type="pl.ipebk.setsolver.ui.solver.SolverViewModel"/>
+    </data>
 
-    <include
-        android:id="@+id/loading"
-        layout="@layout/loading_solver_layout"/>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.solver.SolverActivity">
 
-    <include
-        android:id="@+id/error"
-        layout="@layout/error_solver_layout"/>
-</RelativeLayout>
+        <include
+            android:id="@+id/solution"
+            layout="@layout/solution_solver_layout"/>
+
+        <include
+            android:id="@+id/loading"
+            layout="@layout/loading_solver_layout"/>
+
+        <include
+            android:id="@+id/error"
+            layout="@layout/error_solver_layout"/>
+    </RelativeLayout>
+</layout>

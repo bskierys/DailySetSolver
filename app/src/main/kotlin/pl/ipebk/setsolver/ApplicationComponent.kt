@@ -7,6 +7,8 @@ import pl.ipebk.setsolver.ui.detail.DetailComponent
 import pl.ipebk.setsolver.ui.detail.DetailModule
 import pl.ipebk.setsolver.ui.list.ListComponent
 import pl.ipebk.setsolver.ui.list.ListModule
+import pl.ipebk.setsolver.ui.solver.SolverComponent
+import pl.ipebk.setsolver.ui.solver.SolverModule
 import javax.inject.Singleton
 
 @Singleton
@@ -24,4 +26,5 @@ interface ApplicationComponent {
     // Every screen is its own submodule of the graph and must be added here.
     fun plus(module: ListModule): ListComponent
     fun plus(module: DetailModule): DetailComponent
+    fun plus(module: SolverModule) : SolverComponent
 }
