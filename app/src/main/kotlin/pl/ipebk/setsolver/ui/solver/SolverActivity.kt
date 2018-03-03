@@ -2,12 +2,12 @@ package pl.ipebk.setsolver.ui.solver
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
+import butterknife.BindView
+import butterknife.ButterKnife
 import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_solver.*
 import pl.ipebk.setsolver.JobExecutor
 import pl.ipebk.setsolver.R
@@ -22,9 +22,11 @@ import pl.ipebk.setsolver.remote.DailySetApiService
 import pl.ipebk.setsolver.remote.DailySetRemoteImpl
 import pl.ipebk.setsolver.remote.mapper.DailySetEntityMapper
 import pl.ipebk.solver.SetGameSolver
-import timber.log.Timber
 
 class SolverActivity : AppCompatActivity() {
+  @BindView(R.id.container)
+  lateinit var container: LinearLayout
+
   private val remote = DailySetRemoteImpl(DailySetApiService(), DailySetEntityMapper())
   private val engine = DailySetEngineImpl(SetGameSolver(4, 3), CardMapperImpl())
 
@@ -33,6 +35,11 @@ class SolverActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_solver)
+    ButterKnife.bind(this)
+
+    error.visibility = View.INVISIBLE
+    loading.visibility = View.VISIBLE
+    solution.visibility = View.INVISIBLE
 
     findSolutionUseCase.execute(DailyPuzzleSubscriber())
   }
@@ -72,13 +79,18 @@ class SolverActivity : AppCompatActivity() {
     return image
   }
 
-  inner class DailyPuzzleSubscriber: DisposableSingleObserver<SetSolution>() {
+  inner class DailyPuzzleSubscriber : DisposableSingleObserver<SetSolution>() {
     override fun onSuccess(sets: SetSolution) {
+      error.visibility = View.INVISIBLE
+      loading.visibility = View.INVISIBLE
+      solution.visibility = View.VISIBLE
       addSetsToLayout(sets)
     }
 
     override fun onError(e: Throwable) {
-      // TODO: handle error on ui
+      error.visibility = View.VISIBLE
+      loading.visibility = View.INVISIBLE
+      solution.visibility = View.INVISIBLE
     }
   }
 }

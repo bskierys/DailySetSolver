@@ -13,4 +13,7 @@
     <string name="repo_star_icon_content_description">Repo Star Icon</string>
     <string name="repo_fork_icon_content_description">Repo Fork Icon</string>
     <string name="repo_icon_content_description">Repo Icon</string>
+
+    <string name="solver_loading">Downloading today\'s puzzle&#8230;</string>
+    <string name="solver_generic_error">Could not download puzzle</string>
 </resources>
