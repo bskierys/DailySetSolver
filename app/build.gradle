@@ -6,8 +6,8 @@ apply plugin: 'kotlin-kapt'
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
-    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
-    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+    compileSdkVersion globalConfiguration.androidCompileSdkVersion
+    buildToolsVersion globalConfiguration.androidBuildToolsVersion
 
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
@@ -15,10 +15,10 @@ android {
 
     defaultConfig {
         applicationId globalConfiguration.androidApplicationId
-        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
-        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
-        versionCode globalConfiguration.getAt("androidVersionCode")
-        versionName globalConfiguration.getAt("androidVersionName")
+        minSdkVersion globalConfiguration.androidMinSdkVersion
+        targetSdkVersion globalConfiguration.androidTargetSdkVersion
+        versionCode globalConfiguration.androidVersionCode
+        versionName globalConfiguration.androidVersionName
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -79,57 +79,57 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(":solver")
-    compile project(":remote")
-    compile project(":domain")
-    compile project(":engine")
     def mobileDependencies = rootProject.ext.mobileDependencies
 
+    implementation project(":solver")
+    implementation project(":remote")
+    implementation project(":domain")
+    implementation project(":engine")
+
     // Kotlin
-    compile mobileDependencies.kotlin
+    implementation mobileDependencies.kotlin
 
     // Google Support Libraries
-    compile mobileDependencies.support
-    compile mobileDependencies.supportFragment
-    compile mobileDependencies.appcompat
-    compile mobileDependencies.design
-    compile mobileDependencies.recyclerView
+    implementation mobileDependencies.support
+    implementation mobileDependencies.supportFragment
+    implementation mobileDependencies.appcompat
+    implementation mobileDependencies.design
+    implementation mobileDependencies.recyclerView
 
     // RxJava
-    compile mobileDependencies.rxjava
-    compile mobileDependencies.rxandroid
-    compile mobileDependencies.rxbinding
-    compile mobileDependencies.rxSchedulerRule
-    compile mobileDependencies.rxDelay
+    implementation mobileDependencies.rxjava
+    implementation mobileDependencies.rxandroid
+    implementation mobileDependencies.rxbinding
+    implementation mobileDependencies.rxSchedulerRule
+    implementation mobileDependencies.rxDelay
 
     // Dagger 2
     kapt mobileDependencies.daggerCompiler
-    compile mobileDependencies.dagger
+    implementation mobileDependencies.dagger
 
     // Retrofit
-    compile mobileDependencies.retrofit
-    compile mobileDependencies.retrofitConverter
-    compile mobileDependencies.retrofitRxAdapter
+    implementation mobileDependencies.retrofit
+    implementation mobileDependencies.retrofitConverter
+    implementation mobileDependencies.retrofitRxAdapter
 
     // logs
-    compile mobileDependencies.pine
-    compile mobileDependencies.timbertreeutils
+    implementation mobileDependencies.pine
+    implementation mobileDependencies.timbertreeutils
 
     // image downloading
-    compile mobileDependencies.picasso
-    compile mobileDependencies.rxNetwork
+    implementation mobileDependencies.picasso
+    implementation mobileDependencies.rxNetwork
 
     // Databinding
     kapt mobileDependencies.databinding
 
     // butterknife
-    compile mobileDependencies.butterknife
+    implementation mobileDependencies.butterknife
     kapt mobileDependencies.butterknifeCompiler
 
     // Unit Testing
-    testCompile mobileDependencies.junit
-    testCompile mobileDependencies.mockitoOne
+    testImplementation mobileDependencies.junit
+    testImplementation mobileDependencies.mockitoOne
 }
 
 repositories {
