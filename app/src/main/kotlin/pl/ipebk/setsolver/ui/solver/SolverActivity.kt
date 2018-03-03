@@ -6,9 +6,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_solver.*
+import pl.ipebk.setsolver.JobExecutor
 import pl.ipebk.setsolver.R
+import pl.ipebk.setsolver.UiThread
 import pl.ipebk.setsolver.domain.SetCard
 import pl.ipebk.setsolver.domain.SetCardThreePack
 import pl.ipebk.setsolver.domain.SetSolution
@@ -25,22 +28,18 @@ class SolverActivity : AppCompatActivity() {
   private val remote = DailySetRemoteImpl(DailySetApiService(), DailySetEntityMapper())
   private val engine = DailySetEngineImpl(SetGameSolver(4, 3), CardMapperImpl())
 
-  private val findSolutionUseCase = FindDailySetSolution(engine, remote)
-
-  private val subscriptions = CompositeDisposable()
+  private val findSolutionUseCase = FindDailySetSolution(engine, remote, JobExecutor(), UiThread())
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_solver)
 
-    val downloadSubscription = findSolutionUseCase.execute()
-      .subscribeOn(Schedulers.io())
-      .observeOn(AndroidSchedulers.mainThread())
-      .doOnSuccess { addSetsToLayout(it) }
-      .doOnError { Timber.e(it) }
-      .subscribe()
+    findSolutionUseCase.execute(DailyPuzzleSubscriber())
+  }
 
-    subscriptions.add(downloadSubscription)
+  override fun onDestroy() {
+    super.onDestroy()
+    findSolutionUseCase.dispose()
   }
 
   private fun addSetsToLayout(solution: SetSolution) {
@@ -73,8 +72,13 @@ class SolverActivity : AppCompatActivity() {
     return image
   }
 
-  override fun onDestroy() {
-    super.onDestroy()
-    subscriptions.dispose()
+  inner class DailyPuzzleSubscriber: DisposableSingleObserver<SetSolution>() {
+    override fun onSuccess(sets: SetSolution) {
+      addSetsToLayout(sets)
+    }
+
+    override fun onError(e: Throwable) {
+      // TODO: handle error on ui
+    }
   }
 }
