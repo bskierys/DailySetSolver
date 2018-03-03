@@ -1,5 +1,9 @@
 package pl.ipebk.setsolver.domain
 
+data class SetSolution(val sets: List<SetCardThreePack>)
+
+data class SetCardThreePack(val card1: SetCard, val card2: SetCard, val card3: SetCard)
+
 data class SetCard(val shading: Shading, val symbol: Symbol,
                    val color: Color, val count: Count)
 

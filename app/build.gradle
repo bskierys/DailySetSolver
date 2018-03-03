@@ -83,6 +83,7 @@ dependencies {
     compile project(":solver")
     compile project(":remote")
     compile project(":domain")
+    compile project(":engine")
     def mobileDependencies = rootProject.ext.mobileDependencies
 
     // Kotlin
