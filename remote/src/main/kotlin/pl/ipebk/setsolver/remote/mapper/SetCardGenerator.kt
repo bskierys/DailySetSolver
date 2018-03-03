@@ -15,7 +15,7 @@ internal class SetCardGenerator : Iterator<SetCard> {
   private var currentShadingOrdinal = START_VALUE
   private var currentSymbolOrdinal = START_VALUE
   private var currentColorOrdinal = START_VALUE
-  private var currentCountOrdinal = START_VALUE
+  private var currentCountOrdinal = START_VALUE - 1
 
   override fun hasNext(): Boolean {
     return currentShadingOrdinal < MAX_VALUE
@@ -25,15 +25,13 @@ internal class SetCardGenerator : Iterator<SetCard> {
   }
 
   override fun next(): SetCard {
-    val card = SetCard(
+    increment()
+    return SetCard(
       Shading.values()[currentShadingOrdinal],
       Symbol.values()[currentSymbolOrdinal],
       Color.values()[currentColorOrdinal],
       Count.values()[currentCountOrdinal]
     )
-
-    increment()
-    return card
   }
 
   private fun increment() {
@@ -42,7 +40,7 @@ internal class SetCardGenerator : Iterator<SetCard> {
 
   private fun incrementCount() {
     if (currentCountOrdinal < MAX_VALUE) {
-      currentCountOrdinal ++
+      currentCountOrdinal++
     } else if (currentCountOrdinal == MAX_VALUE) {
       currentCountOrdinal = START_VALUE
       incrementColor()
@@ -51,7 +49,7 @@ internal class SetCardGenerator : Iterator<SetCard> {
 
   private fun incrementColor() {
     if (currentColorOrdinal < MAX_VALUE) {
-      currentColorOrdinal ++
+      currentColorOrdinal++
     } else if (currentColorOrdinal == MAX_VALUE) {
       currentColorOrdinal = START_VALUE
       incrementSymbol()
@@ -60,7 +58,7 @@ internal class SetCardGenerator : Iterator<SetCard> {
 
   private fun incrementSymbol() {
     if (currentSymbolOrdinal < MAX_VALUE) {
-      currentSymbolOrdinal ++
+      currentSymbolOrdinal++
     } else if (currentSymbolOrdinal == MAX_VALUE) {
       currentSymbolOrdinal = START_VALUE
       incrementShading()
@@ -69,7 +67,7 @@ internal class SetCardGenerator : Iterator<SetCard> {
 
   private fun incrementShading() {
     if (currentShadingOrdinal < MAX_VALUE) {
-      currentShadingOrdinal ++
+      currentShadingOrdinal++
     } else if (currentShadingOrdinal == MAX_VALUE) {
       throw IndexOutOfBoundsException("has no next element")
     }

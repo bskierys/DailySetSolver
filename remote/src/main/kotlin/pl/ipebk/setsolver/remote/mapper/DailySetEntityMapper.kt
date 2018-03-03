@@ -24,7 +24,7 @@ class DailySetEntityMapper : EntityMapper<Int, SetCard> {
   }
 
   override fun mapFromRemote(type: Int): SetCard {
-    if (type < 0 || type >= SetCardHolder.cardMap.size)
+    if (type <= 0 || type > SetCardHolder.cardMap.size)
       throw IllegalArgumentException("no such card")
 
     return SetCardHolder.cardMap[type]!!
