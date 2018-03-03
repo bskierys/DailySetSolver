@@ -3,17 +3,11 @@ package pl.ipebk.setsolver.ui.solver
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableSingleObserver
 import kotlinx.android.synthetic.main.activity_solver.*
-import kotlinx.android.synthetic.main.error_solver_layout.view.*
-import kotlinx.android.synthetic.main.solution_solver_layout.view.*
 import pl.ipebk.setsolver.ApplicationComponent
 import pl.ipebk.setsolver.R
 import pl.ipebk.setsolver.databinding.ActivitySolverBinding
@@ -23,6 +17,9 @@ import pl.ipebk.setsolver.domain.SetSolution
 import pl.ipebk.setsolver.ui.base.ViewModelActivity
 
 class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>() {
+  private lateinit var container: LinearLayout
+  private lateinit var errorMessage: TextView
+
   private val disposables: CompositeDisposable = CompositeDisposable()
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,22 +31,26 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
     super.onBind()
     binding.viewModel = viewModel
 
+    container = findViewById(R.id.container)
+    errorMessage = findViewById(R.id.error_message)
+    hideErrorState()
+
     viewModel.fetchAndSolveDaily()
 
-    disposables.add(viewModel.getSolution().subscribe {
+    disposables.add(viewModel.solutionStream.subscribe {
       showSolutionLayout(it)
     })
 
-    disposables.add(viewModel.loadingState().subscribe {
-      binding.loading.visibility = if (it) View.VISIBLE else View.INVISIBLE
+    disposables.add(viewModel.loadingStateStream.subscribe {
+      loading.visibility = if (it) View.VISIBLE else View.INVISIBLE
     })
 
-    disposables.add(viewModel.fetchErrors().subscribe {
-      showErrorState("Could not solve or download puzzle")
+    disposables.add(viewModel.genericErrorStream.subscribe {
+      showErrorState(getString(R.string.solver_error_generic))
     })
 
-    disposables.add(viewModel.networkErrors().subscribe {
-      showErrorState("Problem with Internet connection")
+    disposables.add(viewModel.networkErrorStream.subscribe {
+      showErrorState(getString(R.string.solver_error_network))
     })
   }
 
@@ -62,11 +63,15 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
   }
 
   private fun showErrorState(message: String) {
-    binding.error.visibility = View.VISIBLE
-    binding.loading.visibility = View.INVISIBLE
-    binding.solution.visibility = View.INVISIBLE
+    error.visibility = View.VISIBLE
+    loading.visibility = View.INVISIBLE
+    solution.visibility = View.INVISIBLE
 
-    binding.error.error_message.text = message
+    errorMessage.text = message
+  }
+
+  private fun hideErrorState() {
+    error.visibility = View.INVISIBLE
   }
 
   override fun onDestroy() {
@@ -84,7 +89,7 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
 
   private fun addSetsToLayout(solution: SetSolution) {
     solution.sets.forEach {
-      binding.solution.container.addView(getCardRow(it))
+      container.addView(getCardRow(it))
     }
   }
 

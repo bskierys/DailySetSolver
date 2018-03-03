@@ -16,4 +16,6 @@
 
     <string name="solver_loading">Downloading today\'s puzzle&#8230;</string>
     <string name="solver_generic_error">Could not download puzzle</string>
+    <string name="solver_error_network">Problem with Internet connection</string>
+    <string name="solver_error_generic">Could not solve or download puzzle</string>
 </resources>

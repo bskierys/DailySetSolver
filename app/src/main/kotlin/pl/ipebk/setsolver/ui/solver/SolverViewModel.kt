@@ -1,7 +1,9 @@
 package pl.ipebk.setsolver.ui.solver
 
+import android.net.NetworkInfo
+import com.github.pwittchen.reactivenetwork.library.rx2.ConnectivityPredicate
+import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import io.github.plastix.rxdelay.RxDelay
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
@@ -11,10 +13,11 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import pl.ipebk.setsolver.data.network.NetworkInteractor
-import pl.ipebk.setsolver.data.remote.model.Repo
 import pl.ipebk.setsolver.domain.SetSolution
 import pl.ipebk.setsolver.domain.interactor.FindDailySetSolution
 import pl.ipebk.setsolver.ui.base.RxViewModel
+import pl.ipebk.setsolver.ui.misc.SubjectDelegate
+import timber.log.Timber
 import javax.inject.Inject
 
 class SolverViewModel @Inject constructor(
@@ -25,8 +28,13 @@ class SolverViewModel @Inject constructor(
 
   private var solution: BehaviorSubject<SetSolution> = BehaviorSubject.create()
   private var loadingState: BehaviorSubject<Boolean> = BehaviorSubject.createDefault(true)
-  private val fetchErrors: PublishSubject<Throwable> = PublishSubject.create()
+  private val genericErrors: PublishSubject<Throwable> = PublishSubject.create()
   private val networkErrors: PublishSubject<Throwable> = PublishSubject.create()
+
+  internal val solutionStream by SubjectDelegate(solution)
+  internal val loadingStateStream by SubjectDelegate(loadingState)
+  internal val networkErrorStream by SubjectDelegate(networkErrors)
+  internal val genericErrorStream by SubjectDelegate(genericErrors)
 
   fun fetchAndSolveDaily() {
     networkRequest = networkInteractor.hasNetworkConnectionCompletable()
@@ -44,8 +52,25 @@ class SolverViewModel @Inject constructor(
         override fun onError(e: Throwable) {
           loadingState.onNext(false)
           networkErrors.onNext(e)
+          loadWhenConnectionChanges()
         }
       })
+
+    addDisposable(networkRequest)
+  }
+
+  private fun loadWhenConnectionChanges() {
+    val connectionBackOn = networkInteractor.observeConnection()
+      .subscribeOn(Schedulers.io())
+      .filter { ConnectivityPredicate.hasState(NetworkInfo.State.CONNECTED).test(it) }
+      .observeOn(AndroidSchedulers.mainThread())
+      .doOnError { Timber.e(it)}
+      .subscribe {
+        loadingState.onNext(true)
+        findSolutionUseCase.execute(DailyPuzzleSubscriber())
+      }
+
+    addDisposable(connectionBackOn)
   }
 
   inner class DailyPuzzleSubscriber : DisposableSingleObserver<SetSolution>() {
@@ -56,16 +81,7 @@ class SolverViewModel @Inject constructor(
 
     override fun onError(e: Throwable) {
       loadingState.onNext(false)
-      fetchErrors.onNext(e)
+      genericErrors.onNext(e)
     }
   }
-
-  //todo maybe delegated properties?
-  fun getSolution(): Observable<SetSolution> = solution.hide()
-
-  fun fetchErrors(): Observable<Throwable> = fetchErrors.hide()
-
-  fun networkErrors(): Observable<Throwable> = networkErrors.hide()
-
-  fun loadingState(): Observable<Boolean> = loadingState.hide()
 }
