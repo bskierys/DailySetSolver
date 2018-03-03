@@ -42,7 +42,7 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
     })
 
     disposables.add(viewModel.loadingStateStream.subscribe {
-      loading.visibility = if (it) View.VISIBLE else View.INVISIBLE
+      showLoadingState(it)
     })
 
     disposables.add(viewModel.genericErrorStream.subscribe {
@@ -52,6 +52,11 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
     disposables.add(viewModel.networkErrorStream.subscribe {
       showErrorState(getString(R.string.solver_error_network))
     })
+  }
+
+  private fun showLoadingState(it: Boolean) {
+    loading.visibility = if (it) View.VISIBLE else View.INVISIBLE
+    if (it) hideErrorState()
   }
 
   private fun showSolutionLayout(sets: SetSolution) {
@@ -88,6 +93,7 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
   }
 
   private fun addSetsToLayout(solution: SetSolution) {
+    container.removeAllViews()
     solution.sets.forEach {
       container.addView(getCardRow(it))
     }

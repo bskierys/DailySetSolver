@@ -11,6 +11,8 @@ dependencies {
     implementation project(":solver")
     implementation mobileDependencies.kotlin
     implementation mobileDependencies.rxjava
+    implementation mobileDependencies.javaxInject
+    implementation mobileDependencies.javaxAnnotation
 
     // assertion
     testImplementation mobileDependencies.junit

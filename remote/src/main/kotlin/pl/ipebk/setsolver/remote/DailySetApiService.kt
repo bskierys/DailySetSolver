@@ -1,11 +1,12 @@
 package pl.ipebk.setsolver.remote
 
 import io.reactivex.Single
+import javax.inject.Inject
 
 /**
  * Service to retrieve today's puzzle
  */
-class DailySetApiService {
+class DailySetApiService @Inject constructor() {
   /**
    * Retrieve today's puzzle from official Set website
    */

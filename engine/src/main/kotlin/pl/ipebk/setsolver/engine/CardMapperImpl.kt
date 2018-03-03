@@ -2,11 +2,12 @@ package pl.ipebk.setsolver.engine
 
 import pl.ipebk.setsolver.domain.*
 import pl.ipebk.solver.Card
+import javax.inject.Inject
 
 /**
  * Implementation of [CardMapper]
  */
-class CardMapperImpl : CardMapper {
+class CardMapperImpl @Inject constructor(): CardMapper {
   override fun mapFromSolverModel(card: Card): SetCard {
     if (card.features.size != 4) {
       throw IllegalArgumentException("card should have 4 features")

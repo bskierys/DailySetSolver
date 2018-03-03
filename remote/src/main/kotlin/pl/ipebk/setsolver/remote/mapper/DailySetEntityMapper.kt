@@ -1,11 +1,12 @@
 package pl.ipebk.setsolver.remote.mapper
 
 import pl.ipebk.setsolver.domain.*
+import javax.inject.Inject
 
 /**
  * Map a [Int] to a [SetCard] instance when data is moving between this layer and the Domain layer
  */
-class DailySetEntityMapper : EntityMapper<Int, SetCard> {
+class DailySetEntityMapper @Inject constructor(): EntityMapper<Int, SetCard> {
 
   private object SetCardHolder {
     val cardMap = mutableMapOf<Int, SetCard>()

@@ -2,7 +2,6 @@ package pl.ipebk.setsolver.ui.solver
 
 import android.net.NetworkInfo
 import com.github.pwittchen.reactivenetwork.library.rx2.ConnectivityPredicate
-import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import io.github.plastix.rxdelay.RxDelay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -60,17 +59,19 @@ class SolverViewModel @Inject constructor(
   }
 
   private fun loadWhenConnectionChanges() {
-    val connectionBackOn = networkInteractor.observeConnection()
+    networkRequest.dispose()
+    networkRequest = networkInteractor.observeConnection()
       .subscribeOn(Schedulers.io())
       .filter { ConnectivityPredicate.hasState(NetworkInfo.State.CONNECTED).test(it) }
       .observeOn(AndroidSchedulers.mainThread())
-      .doOnError { Timber.e(it)}
+      .doOnError { Timber.e(it) }
       .subscribe {
         loadingState.onNext(true)
         findSolutionUseCase.execute(DailyPuzzleSubscriber())
+        networkRequest.dispose()
       }
 
-    addDisposable(connectionBackOn)
+    addDisposable(networkRequest)
   }
 
   inner class DailyPuzzleSubscriber : DisposableSingleObserver<SetSolution>() {

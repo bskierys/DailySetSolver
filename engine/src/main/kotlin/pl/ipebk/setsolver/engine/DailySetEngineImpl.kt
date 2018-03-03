@@ -6,12 +6,13 @@ import pl.ipebk.setsolver.domain.SetCard
 import pl.ipebk.setsolver.domain.SetCardThreePack
 import pl.ipebk.setsolver.domain.SetSolution
 import pl.ipebk.solver.SetGameSolver
+import javax.inject.Inject
 
 /**
  * Engine implementation to solve puzzles. This class implements the [DailySetEngine] from the
  * Domain layer
  */
-class DailySetEngineImpl(private val solver: SetGameSolver,
+class DailySetEngineImpl @Inject constructor(private val solver: SetGameSolver,
                          private val mapper: CardMapper) : DailySetEngine {
 
   override fun getSolution(cards: List<SetCard>): Single<SetSolution> {

@@ -11,6 +11,8 @@ dependencies {
     implementation mobileDependencies.kotlin
     implementation mobileDependencies.rxjava
     implementation mobileDependencies.jsoup
+    implementation mobileDependencies.javaxInject
+    implementation mobileDependencies.javaxAnnotation
 
     // assertion
     testImplementation mobileDependencies.junit

@@ -9,6 +9,8 @@ dependencies {
     def mobileDependencies = rootProject.ext.mobileDependencies
     implementation mobileDependencies.kotlin
     implementation mobileDependencies.rxjava
+    implementation mobileDependencies.javaxInject
+    implementation mobileDependencies.javaxAnnotation
 }
 
 sourceCompatibility = "1.7"

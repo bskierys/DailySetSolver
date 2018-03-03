@@ -59,14 +59,4 @@ class ApplicationModule(private val app: KotlinBoilerplateApp) {
   internal fun provideThreadExecutor(jobExecutor: JobExecutor): ThreadExecutor {
     return jobExecutor
   }
-
-  // todo: section below belongs to different modules
-
-  @Provides
-  internal fun provideFindSolutionUseCase(): FindDailySetSolution {
-    val remote = DailySetRemoteImpl(DailySetApiService(), DailySetEntityMapper())
-    val engine = DailySetEngineImpl(SetGameSolver(4, 3), CardMapperImpl())
-
-    return FindDailySetSolution(engine, remote, JobExecutor(), UiThread())
-  }
 }
