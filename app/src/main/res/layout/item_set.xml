@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="pl.ipebk.setsolver.presentation.ui.solver.SetViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:onClick="@{() -> viewModel.onClick()}"
+        tools:ignore="contentDescription">
+
+        <ImageView
+            android:id="@+id/card1View"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:src="@drawable/outlined_diamond_green_one"/>
+
+        <ImageView
+            android:id="@+id/card2View"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:src="@drawable/solid_diamond_red_two"/>
+
+        <ImageView
+            android:id="@+id/card3View"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:src="@drawable/striped_diamond_purple_three"/>
+
+    </LinearLayout>
+
+</layout>
