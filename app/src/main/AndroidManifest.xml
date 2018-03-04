@@ -6,22 +6,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-        android:name=".DailySetSolverApp"
+        android:name=".presentation.DailySetSolverApp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.list.ListActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".ui.detail.DetailActivity"
-            android:parentActivityName=".ui.list.ListActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".ui.solver.SolverActivity"
+            android:name=".presentation.ui.solver.SolverActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

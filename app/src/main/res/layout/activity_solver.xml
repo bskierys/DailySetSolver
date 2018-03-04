@@ -4,7 +4,7 @@
 
         <variable
             name="viewModel"
-            type="pl.ipebk.setsolver.ui.solver.SolverViewModel"/>
+            type="pl.ipebk.setsolver.presentation.ui.solver.SolverViewModel"/>
     </data>
 
     <RelativeLayout
