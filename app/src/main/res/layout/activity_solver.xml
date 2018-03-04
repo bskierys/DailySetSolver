@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
 
         <variable
@@ -16,7 +17,8 @@
 
         <include
             android:id="@+id/solution"
-            layout="@layout/solution_solver_layout"/>
+            layout="@layout/solution_solver_layout"
+            tools:visibility="invisible"/>
 
         <include
             android:id="@+id/loading"
@@ -24,6 +26,7 @@
 
         <include
             android:id="@+id/error"
-            layout="@layout/error_solver_layout"/>
+            layout="@layout/error_solver_layout"
+            tools:visibility="invisible"/>
     </RelativeLayout>
 </layout>
