@@ -33,7 +33,7 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
 
     container = findViewById(R.id.container)
     errorMessage = findViewById(R.id.error_message)
-    hideErrorState()
+    error.visibility = View.INVISIBLE
 
     viewModel.fetchAndSolveDaily()
 
@@ -54,9 +54,14 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
     })
   }
 
-  private fun showLoadingState(it: Boolean) {
-    loading.visibility = if (it) View.VISIBLE else View.INVISIBLE
-    if (it) hideErrorState()
+  private fun showLoadingState(visible: Boolean) {
+    if (visible) {
+      loading.visibility = View.VISIBLE
+      error.visibility = View.INVISIBLE
+      solution.visibility = View.INVISIBLE
+    } else {
+      loading.visibility = View.INVISIBLE
+    }
   }
 
   private fun showSolutionLayout(sets: SetSolution) {
@@ -73,10 +78,6 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
     solution.visibility = View.INVISIBLE
 
     errorMessage.text = message
-  }
-
-  private fun hideErrorState() {
-    error.visibility = View.INVISIBLE
   }
 
   override fun onDestroy() {
