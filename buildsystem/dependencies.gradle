@@ -8,7 +8,7 @@ allprojects {
 
 ext {
     //Android
-    androidApplicationId = 'pl.ipebk.tabi'
+    androidApplicationId = 'pl.ipebk.setsolver'
     androidVersionCode = readVersionCode()
     androidVersionName = readVersionName()
     androidBuildToolsVersion = "27.0.3"
