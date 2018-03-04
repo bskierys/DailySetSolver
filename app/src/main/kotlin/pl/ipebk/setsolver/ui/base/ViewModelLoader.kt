@@ -7,31 +7,31 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 class ViewModelLoader<T : ViewModel> @Inject constructor(
-        @ActivityScope context: Context,
-        private val viewModelFactory: Provider<T>
+  @ActivityScope context: Context,
+  private val viewModelFactory: Provider<T>
 ) : Loader<T>(context) {
 
-    private var viewModel: T? = null
+  private var viewModel: T? = null
 
-    override fun onStartLoading() {
-        super.onStartLoading()
+  override fun onStartLoading() {
+    super.onStartLoading()
 
-        if (viewModel == null)
-            forceLoad()
-        else
-            deliverResult(viewModel)
-    }
+    if (viewModel == null)
+      forceLoad()
+    else
+      deliverResult(viewModel)
+  }
 
-    override fun onForceLoad() {
-        super.onForceLoad()
-        viewModel = viewModelFactory.get()
+  override fun onForceLoad() {
+    super.onForceLoad()
+    viewModel = viewModelFactory.get()
 
-        deliverResult(viewModel)
-    }
+    deliverResult(viewModel)
+  }
 
-    override fun onReset() {
-        super.onReset()
+  override fun onReset() {
+    super.onReset()
 
-        viewModel?.onDestroy()
-    }
+    viewModel?.onDestroy()
+  }
 }

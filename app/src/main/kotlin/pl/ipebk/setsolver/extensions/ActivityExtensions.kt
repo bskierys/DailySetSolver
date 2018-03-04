@@ -7,5 +7,5 @@ import android.support.v7.app.AppCompatActivity
  * from!
  */
 fun AppCompatActivity.enableToolbarBackButton() {
-    delegate.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+  delegate.supportActionBar?.setDisplayHomeAsUpEnabled(true)
 }

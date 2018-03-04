@@ -74,7 +74,7 @@ open class SolverViewModel @Inject constructor(
     addDisposable(networkRequest)
   }
 
-  protected open fun getDailyPuzzleSubscriber() : DisposableSingleObserver<SetSolution> {
+  protected open fun getDailyPuzzleSubscriber(): DisposableSingleObserver<SetSolution> {
     return DailyPuzzleSubscriber()
   }
 

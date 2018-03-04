@@ -8,9 +8,9 @@ import dagger.Provides
 @Module
 abstract class ActivityModule(private val activity: AppCompatActivity) {
 
-    @Provides
-    fun provideActivity(): AppCompatActivity = activity
+  @Provides
+  fun provideActivity(): AppCompatActivity = activity
 
-    @Provides
-    fun provideActivityContext(): Context = activity.baseContext
+  @Provides
+  fun provideActivityContext(): Context = activity.baseContext
 }

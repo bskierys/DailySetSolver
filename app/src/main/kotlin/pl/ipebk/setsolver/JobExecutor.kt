@@ -10,9 +10,9 @@ import javax.inject.Inject
 /**
  * Decorated [ThreadPoolExecutor]
  */
-open class JobExecutor @Inject constructor(): ThreadExecutor {
+open class JobExecutor @Inject constructor() : ThreadExecutor {
 
-  private val workQueue= LinkedBlockingQueue<Runnable>()
+  private val workQueue = LinkedBlockingQueue<Runnable>()
   private val threadPoolExecutor: ThreadPoolExecutor
   private val threadFactory: ThreadFactory
 

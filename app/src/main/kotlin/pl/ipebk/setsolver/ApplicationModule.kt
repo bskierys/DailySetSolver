@@ -9,18 +9,11 @@ import dagger.Module
 import dagger.Provides
 import pl.ipebk.setsolver.domain.executor.PostExecutionThread
 import pl.ipebk.setsolver.domain.executor.ThreadExecutor
-import pl.ipebk.setsolver.domain.interactor.FindDailySetSolution
-import pl.ipebk.setsolver.engine.CardMapperImpl
-import pl.ipebk.setsolver.engine.DailySetEngineImpl
-import pl.ipebk.setsolver.remote.DailySetApiService
-import pl.ipebk.setsolver.remote.DailySetRemoteImpl
-import pl.ipebk.setsolver.remote.mapper.DailySetEntityMapper
-import pl.ipebk.solver.SetGameSolver
 import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
-class ApplicationModule(private val app: KotlinBoilerplateApp) {
+class ApplicationModule(private val app: DailySetSolverApp) {
 
   @Provides
   @Singleton

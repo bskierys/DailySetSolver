@@ -10,11 +10,15 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
-    @Provides @Singleton
-    fun provideConnectivityManager(@ApplicationQualifier context: Context): ConnectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+  @Provides
+  @Singleton
+  fun provideConnectivityManager(@ApplicationQualifier context: Context):
+    ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE)
+    as ConnectivityManager
 
-    @Provides @Singleton
-    fun provideNetworkInteractor(networkInteractorImpl: NetworkInteractorImpl): NetworkInteractor = networkInteractorImpl
+  @Provides
+  @Singleton
+  fun provideNetworkInteractor(networkInteractorImpl: NetworkInteractorImpl):
+    NetworkInteractor = networkInteractorImpl
 
 }
