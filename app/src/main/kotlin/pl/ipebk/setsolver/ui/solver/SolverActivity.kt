@@ -5,9 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_solver.*
+import kotlinx.android.synthetic.main.error_solver_layout.view.*
+import kotlinx.android.synthetic.main.solution_solver_layout.view.*
 import pl.ipebk.setsolver.ApplicationComponent
 import pl.ipebk.setsolver.R
 import pl.ipebk.setsolver.databinding.ActivitySolverBinding
@@ -15,11 +16,9 @@ import pl.ipebk.setsolver.domain.SetCard
 import pl.ipebk.setsolver.domain.SetCardThreePack
 import pl.ipebk.setsolver.domain.SetSolution
 import pl.ipebk.setsolver.ui.base.ViewModelActivity
+import timber.log.Timber
 
 class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>() {
-  private lateinit var container: LinearLayout
-  private lateinit var errorMessage: TextView
-
   private val disposables: CompositeDisposable = CompositeDisposable()
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,27 +30,33 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
     super.onBind()
     binding.viewModel = viewModel
 
-    container = findViewById(R.id.container)
-    errorMessage = findViewById(R.id.error_message)
     error.visibility = View.INVISIBLE
 
     viewModel.fetchAndSolveDaily()
 
-    disposables.add(viewModel.solutionStream.subscribe {
-      showSolutionLayout(it)
-    })
+    disposables.add(viewModel.solutionStream
+      .doOnError(Timber::e)
+      .subscribe {
+        showSolutionLayout(it)
+      })
 
-    disposables.add(viewModel.loadingStateStream.subscribe {
-      showLoadingState(it)
-    })
+    disposables.add(viewModel.loadingStateStream
+      .doOnError(Timber::e)
+      .subscribe {
+        showLoadingState(it)
+      })
 
-    disposables.add(viewModel.genericErrorStream.subscribe {
-      showErrorState(getString(R.string.solver_error_generic))
-    })
+    disposables.add(viewModel.genericErrorStream
+      .doOnError(Timber::e)
+      .subscribe {
+        showErrorState(getString(R.string.solver_error_generic))
+      })
 
-    disposables.add(viewModel.networkErrorStream.subscribe {
-      showErrorState(getString(R.string.solver_error_network))
-    })
+    disposables.add(viewModel.networkErrorStream
+      .doOnError(Timber::e)
+      .subscribe {
+        showErrorState(getString(R.string.solver_error_network))
+      })
   }
 
   private fun showLoadingState(visible: Boolean) {
@@ -77,7 +82,7 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
     loading.visibility = View.INVISIBLE
     solution.visibility = View.INVISIBLE
 
-    errorMessage.text = message
+    error.error_message.text = message
   }
 
   override fun onDestroy() {
@@ -94,9 +99,9 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
   }
 
   private fun addSetsToLayout(solution: SetSolution) {
-    container.removeAllViews()
+    this.solution.container.removeAllViews()
     solution.sets.forEach {
-      container.addView(getCardRow(it))
+      this.solution.container.addView(getCardRow(it))
     }
   }
 

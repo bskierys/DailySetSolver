@@ -45,8 +45,6 @@ ext {
     junitVersion = '4.12'
     mockitoTwoVersion = '2.15.0'
     mockitoOneVersion = '1.10.19'
-    // ButterKnife
-    butterknifeVersion = '8.8.1'
 
     mobileDependencies = [
             // Android
@@ -89,8 +87,6 @@ ext {
 
             // databinding
             databinding        : "com.android.databinding:compiler:${databindingVersion}",
-            butterknife        : "com.jakewharton:butterknife:${butterknifeVersion}",
-            butterknifeCompiler: "com.jakewharton:butterknife-compiler:${butterknifeVersion}",
 
             // Unit test dependencies
             junit              : "junit:junit:${junitVersion}",

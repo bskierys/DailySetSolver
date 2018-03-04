@@ -124,10 +124,6 @@ dependencies {
     // Databinding
     kapt mobileDependencies.databinding
 
-    // butterknife
-    implementation mobileDependencies.butterknife
-    kapt mobileDependencies.butterknifeCompiler
-
     // Unit Testing
     testImplementation mobileDependencies.junit
     testImplementation mobileDependencies.mockitoTwo
