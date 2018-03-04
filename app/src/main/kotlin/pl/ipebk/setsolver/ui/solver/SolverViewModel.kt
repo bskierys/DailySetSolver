@@ -19,7 +19,7 @@ import pl.ipebk.setsolver.ui.misc.SubjectDelegate
 import timber.log.Timber
 import javax.inject.Inject
 
-class SolverViewModel @Inject constructor(
+open class SolverViewModel @Inject constructor(
   private val networkInteractor: NetworkInteractor,
   private val findSolutionUseCase: FindDailySetSolution) : RxViewModel() {
 
@@ -45,12 +45,12 @@ class SolverViewModel @Inject constructor(
         networkRequest.dispose() // Cancel any current running request
       }.subscribeWith(object : DisposableCompletableObserver() {
         override fun onComplete() {
-          findSolutionUseCase.execute(DailyPuzzleSubscriber())
+          findSolutionUseCase.execute(getDailyPuzzleSubscriber())
         }
 
         override fun onError(e: Throwable) {
-          loadingState.onNext(false)
           networkErrors.onNext(e)
+          loadingState.onNext(false)
           loadWhenConnectionChanges()
         }
       })
@@ -67,14 +67,18 @@ class SolverViewModel @Inject constructor(
       .doOnError { Timber.e(it) }
       .subscribe {
         loadingState.onNext(true)
-        findSolutionUseCase.execute(DailyPuzzleSubscriber())
+        findSolutionUseCase.execute(getDailyPuzzleSubscriber())
         networkRequest.dispose()
       }
 
     addDisposable(networkRequest)
   }
 
-  inner class DailyPuzzleSubscriber : DisposableSingleObserver<SetSolution>() {
+  protected open fun getDailyPuzzleSubscriber() : DisposableSingleObserver<SetSolution> {
+    return DailyPuzzleSubscriber()
+  }
+
+  private inner class DailyPuzzleSubscriber : DisposableSingleObserver<SetSolution>() {
     override fun onSuccess(sets: SetSolution) {
       loadingState.onNext(false)
       solution.onNext(sets)

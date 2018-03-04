@@ -95,6 +95,6 @@ ext {
             // Unit test dependencies
             junit              : "junit:junit:${junitVersion}",
             mockitoTwo         : "org.mockito:mockito-core:${mockitoTwoVersion}",
-            mockitoOne         : "org.mockito:mockito-core:${mockitoOneVersion}",
+            mockitoOne         : "org.mockito:mockito-core:${mockitoOneVersion}"
     ]
 }

@@ -29,6 +29,7 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix '.debug'
+            testCoverageEnabled true
         }
         release {
             applicationIdSuffix '.release'
@@ -129,7 +130,7 @@ dependencies {
 
     // Unit Testing
     testImplementation mobileDependencies.junit
-    testImplementation mobileDependencies.mockitoOne
+    testImplementation mobileDependencies.mockitoTwo
 }
 
 repositories {

@@ -11,7 +11,8 @@ import javax.inject.Inject
 /**
  * Use case used for retrieving and solving daily set puzzle
  */
-class FindDailySetSolution @Inject constructor(private val setEngine: DailySetEngine,
+// open to be able to mock with mockito
+open class FindDailySetSolution @Inject constructor(private val setEngine: DailySetEngine,
                            private val remote: DailySetRemote,
                            threadExecutor: ThreadExecutor,
                            postExecutionThread: PostExecutionThread) :
