@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SetGameSolver</string>
+    <string name="app_name">Set Solver</string>
 
     <string name="solver_loading">Downloading today\'s puzzle&#8230;</string>
     <string name="solver_generic_error">Could not download puzzle</string>
