@@ -137,7 +137,7 @@ repositories {
 
 // Signing Config code. From https://gist.github.com/gabrielemariotti/6856974
 def Properties props = new Properties()
-def propFile = new File('dependencies/signing.properties')
+def propFile = new File('buildsystem/signing.properties')
 if (propFile.canRead()) {
     props.load(new FileInputStream(propFile))
 

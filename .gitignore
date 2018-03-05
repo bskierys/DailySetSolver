@@ -46,6 +46,7 @@ captures/
 # Keystore files
 *.jks
 buildsystem/signing.properties.sample
+buildsystem/signing.properties
 
 ### Android Patch ###
 gen-external-apklibs
