@@ -7,10 +7,11 @@ import pl.ipebk.setsolver.presentation.ui.misc.SubjectDelegate
 
 class SetViewModel(val setPack: SetCardThreePack) : AbstractViewModel() {
   private val clicks = PublishSubject.create<Unit>()
-  internal val clickStream by SubjectDelegate(clicks)
-  internal val card1 = setPack.card1
-  internal val card2 = setPack.card2
-  internal val card3 = setPack.card3
+  val clickStream by SubjectDelegate(clicks)
+  val card1 = setPack.card1
+  val card2 = setPack.card2
+  val card3 = setPack.card3
+  var selected = false
 
   fun onClick() {
     clicks.onNext(Unit)

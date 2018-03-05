@@ -4,4 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="solver_loading_margin">16dp</dimen>
+    <dimen name="card_height">64dp</dimen>
+    <dimen name="card_margin">6dp</dimen>
+    <dimen name="header_height">94dp</dimen>
+    <dimen name="header_text_size">18sp</dimen>
 </resources>

@@ -6,4 +6,7 @@
 
     <color name="gray">#9E9E9E</color>
     <color name="gray_light">#e0e0e0</color>
+
+    <drawable name="set_row_unselected_background">@android:color/white</drawable>
+    <drawable name="set_row_selected_background">@color/colorAccent</drawable>
 </resources>
