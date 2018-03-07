@@ -2,7 +2,7 @@
 
 <p align="center">
     <a href="marketing/promocyjne/eng/recommended.png">
-        <img src="promo/recommended.png" width="656" height="320"/>
+        <img src="promo/recommended.png" style='width:100%;'/>
     </a>
 </p>
 
