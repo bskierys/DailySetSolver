@@ -8,7 +8,7 @@
 
 ## About this project
 
-Set Solver is simple project that demonstrates usage of clean architecture with MVVM pattern. This is not common approach as clean architecture is widely used with MVP pattern, so I've decided to give that combination a try.
+Set Solver is a simple project that demonstrates usage of clean architecture with MVVM pattern. This is not a common approach as clean architecture is widely used with MVP pattern, so I've decided to give that combination a try.
 
 ## What does this app do?
 
@@ -16,7 +16,7 @@ Set Solver provides solution to [Daily Set Puzzle](https://www.setgame.com/set/p
 
 If you would like to find out more about game itself, please follow [this link](https://puzzles.setgame.com/set/rules_set.htm).
 
-From the technical point of view, this application fetches today's Set Puzzle, solves it and displays the solution in single Activity. Puzzle is downloaded as raw htm file and then parsed, as the site does not provide any REST API. User can click row to select it as already solved to avoid mistakes.
+From the technical point of view, this application fetches daily Set Puzzle, solves it and displays the solution in a single Activity. Puzzle is downloaded as raw htm file and then parsed, as the site does not provide any REST API. User can click row and mark it as already solved to avoid mistakes.
 
 You can download this app from Google Play Store
 
@@ -24,10 +24,10 @@ You can download this app from Google Play Store
 
 ## Architecture
 
-Project is using clean architecture along with MVVM pattern. It also fully written in kotlin with support from RxJava.
+Project is using clean architecture along with MVVM pattern. It's also written entirely in kotlin with support from RxJava.
 
 **What is clean architecture?**
-The Clean Architecture demonstrates strategies to help solve or avoid these common problems. It is designed to be testable, independent from UI, database or any external data source. Read more in articles below:
+The Clean Architecture demonstrates strategies to help solve or avoid common problems. It is designed to be testable, independent from UI, database or any external data source. Read more in articles below:
 
 [Architecting Android...The clean way?](https://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/)
 
