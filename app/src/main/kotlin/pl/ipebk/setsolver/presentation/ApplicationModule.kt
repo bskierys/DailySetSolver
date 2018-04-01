@@ -26,10 +26,6 @@ class ApplicationModule(private val app: DailySetSolverApp) {
 
   @Provides
   @Singleton
-  fun provideResources(): Resources = app.resources
-
-  @Provides
-  @Singleton
   fun provideLayoutInflater(@ApplicationQualifier context: Context): LayoutInflater {
     return LayoutInflater.from(context)
   }

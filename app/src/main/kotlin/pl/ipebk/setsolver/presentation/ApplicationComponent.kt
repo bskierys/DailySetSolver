@@ -9,7 +9,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(
   ApplicationModule::class,
-  NetworkModule::class
+  NetworkModule::class,
+  DomainModule::class
 ))
 interface ApplicationComponent {
 

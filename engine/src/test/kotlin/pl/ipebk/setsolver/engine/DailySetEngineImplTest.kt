@@ -12,11 +12,11 @@ import pl.ipebk.solver.SetGameSolver
 
 class DailySetEngineImplTest {
   @Mock
-  lateinit var mapper: CardMapper
+  private lateinit var mapper: CardMapper
   @Mock
-  lateinit var solver: SetGameSolver
+  private lateinit var solver: SetGameSolver
 
-  lateinit var engine: DailySetEngineImpl
+  private lateinit var engine: DailySetEngineImpl
 
   @Before
   fun setUp() {

@@ -1,13 +1,12 @@
 package pl.ipebk.setsolver.engine
 
-import com.sun.javaws.exceptions.InvalidArgumentException
 import org.junit.Assert
 import org.junit.Test
 import pl.ipebk.setsolver.domain.*
 import pl.ipebk.solver.Card
 
-class CardMapperImplTest {
-  private val mapper = CardMapperImpl()
+class CardMapperTest {
+  private val mapper = CardMapper()
 
   @Test
   fun `should properly map to solver model 1`() {
