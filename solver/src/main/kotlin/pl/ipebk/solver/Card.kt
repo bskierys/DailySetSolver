@@ -7,30 +7,31 @@ package pl.ipebk.solver
  * @param featureVariants list of variants for default features
  */
 class Card(vararg featureVariants: Int) {
-    val features = ArrayList<Feature>()
-    init {
-        var featureId = 0
-        featureVariants.forEach {
-            features.add(Feature(featureId, it))
-            featureId ++
-        }
+  val features = ArrayList<Feature>()
+
+  init {
+    var featureId = 0
+    featureVariants.forEach {
+      features.add(Feature(featureId, it))
+      featureId++
     }
+  }
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
+  override fun equals(other: Any?): Boolean {
+    if (this === other) return true
+    if (javaClass != other?.javaClass) return false
 
-        other as Card
+    other as Card
 
-        val common = features.intersect(this.features)
-        return common.size == this.features.size
-    }
+    val common = features.intersect(this.features)
+    return common.size == this.features.size
+  }
 
-    override fun hashCode(): Int {
-        return features.hashCode()
-    }
+  override fun hashCode(): Int {
+    return features.hashCode()
+  }
 
-    override fun toString(): String {
-        return "Card(features=$features)"
-    }
+  override fun toString(): String {
+    return "Card(features=$features)"
+  }
 }

@@ -6,17 +6,17 @@ package pl.ipebk.solver
  *
  * @param numberOfElements number of elements in all subsets
  */
-fun <T> ArrayList<T>.allCombinations(numberOfElements: Int) : ArrayList<ArrayList<T>> {
-    val allCombinations = ArrayList<ArrayList<T>>()
+fun <T> ArrayList<T>.allCombinations(numberOfElements: Int): ArrayList<ArrayList<T>> {
+  val allCombinations = ArrayList<ArrayList<T>>()
 
-    val indexCombinations = Combinations(numberOfElements, this.size).computed
-    for (indexCombination in indexCombinations) {
-        val combination = ArrayList<T>()
-        for (index in indexCombination) {
-            combination.add(this[index])
-        }
-        allCombinations.add(combination)
+  val indexCombinations = Combinations(numberOfElements, this.size).computed
+  for (indexCombination in indexCombinations) {
+    val combination = ArrayList<T>()
+    for (index in indexCombination) {
+      combination.add(this[index])
     }
+    allCombinations.add(combination)
+  }
 
-    return allCombinations
+  return allCombinations
 }
