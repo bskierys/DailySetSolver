@@ -8,7 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_solver.*
 import kotlinx.android.synthetic.main.error_solver_layout.view.*
 import kotlinx.android.synthetic.main.solution_solver_layout.view.*
-import pl.ipebk.setsolver.presentation.ApplicationComponent
+import pl.ipebk.setsolver.presentation.appDi.ApplicationComponent
 import pl.ipebk.setsolver.R
 import pl.ipebk.setsolver.databinding.ActivitySolverBinding
 import pl.ipebk.setsolver.domain.SetSolution

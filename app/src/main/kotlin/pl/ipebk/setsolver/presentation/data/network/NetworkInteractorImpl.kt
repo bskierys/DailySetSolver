@@ -6,14 +6,15 @@ import com.github.pwittchen.reactivenetwork.library.rx2.Connectivity
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import io.reactivex.Completable
 import io.reactivex.Observable
-import pl.ipebk.setsolver.presentation.ApplicationQualifier
+import pl.ipebk.setsolver.presentation.appDi.ApplicationScope
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class NetworkInteractorImpl @Inject constructor(
   private val connectivityManager: ConnectivityManager,
-  @ApplicationQualifier private val context: Context) : NetworkInteractor {
+  @ApplicationScope private val context: Context) : NetworkInteractor {
+
   override fun hasNetworkConnection(): Boolean =
     connectivityManager.activeNetworkInfo?.isConnectedOrConnecting ?: false
 

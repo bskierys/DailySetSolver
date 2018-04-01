@@ -1,19 +1,17 @@
 package pl.ipebk.setsolver.domain.interactor
 
+import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.schedulers.Schedulers
-import pl.ipebk.setsolver.domain.executor.PostExecutionThread
-import pl.ipebk.setsolver.domain.executor.ThreadExecutor
 
 /**
  * Abstract class for a UseCase that returns an instance of a [Single].
  */
 abstract class SingleUseCase<T, in Params> constructor(
-  private val threadExecutor: ThreadExecutor,
-  private val postExecutionThread: PostExecutionThread) {
+  private val backgroundScheduler: Scheduler,
+  private val foregroundScheduler: Scheduler) {
 
   private val disposables = CompositeDisposable()
 
@@ -27,8 +25,8 @@ abstract class SingleUseCase<T, in Params> constructor(
    */
   open fun execute(singleObserver: DisposableSingleObserver<T>, params: Params? = null) {
     val single = this.buildUseCaseObservable(params)
-      .subscribeOn(Schedulers.from(threadExecutor))
-      .observeOn(postExecutionThread.scheduler) as Single<T>
+      .subscribeOn(backgroundScheduler)
+      .observeOn(foregroundScheduler) as Single<T>
     addDisposable(single.subscribeWith(singleObserver))
   }
 
@@ -45,5 +43,4 @@ abstract class SingleUseCase<T, in Params> constructor(
   private fun addDisposable(disposable: Disposable) {
     disposables.add(disposable)
   }
-
 }

@@ -1,14 +1,12 @@
-package pl.ipebk.setsolver.presentation
+package pl.ipebk.setsolver.presentation.appDi
 
 import android.app.Application
 import android.content.Context
-import android.content.res.Resources
 import android.view.LayoutInflater
 import com.github.bskierys.pine.Pine
 import dagger.Module
 import dagger.Provides
-import pl.ipebk.setsolver.domain.executor.PostExecutionThread
-import pl.ipebk.setsolver.domain.executor.ThreadExecutor
+import pl.ipebk.setsolver.presentation.DailySetSolverApp
 import timber.log.Timber
 import javax.inject.Singleton
 
@@ -21,12 +19,12 @@ class ApplicationModule(private val app: DailySetSolverApp) {
 
   @Provides
   @Singleton
-  @ApplicationQualifier
+  @ApplicationScope
   fun provideContext(): Context = app.baseContext
 
   @Provides
   @Singleton
-  fun provideLayoutInflater(@ApplicationQualifier context: Context): LayoutInflater {
+  fun provideLayoutInflater(@ApplicationScope context: Context): LayoutInflater {
     return LayoutInflater.from(context)
   }
 
@@ -35,17 +33,5 @@ class ApplicationModule(private val app: DailySetSolverApp) {
     return Pine.Builder()
       .addPackageReplacePattern(app.packageName, "SETAPP")
       .grow()
-  }
-
-  @Provides
-  @Singleton
-  internal fun providePostExecutionThread(uiThread: UiThread): PostExecutionThread {
-    return uiThread
-  }
-
-  @Provides
-  @Singleton
-  internal fun provideThreadExecutor(jobExecutor: JobExecutor): ThreadExecutor {
-    return jobExecutor
   }
 }

@@ -1,18 +1,16 @@
 package pl.ipebk.setsolver.domain.interactor
 
 import io.reactivex.Completable
+import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
-import io.reactivex.schedulers.Schedulers
-import pl.ipebk.setsolver.domain.executor.PostExecutionThread
-import pl.ipebk.setsolver.domain.executor.ThreadExecutor
 
 /**
  * Abstract class for a UseCase that returns an instance of a [Completable].
  */
 abstract class CompletableUseCase<in Params> protected constructor(
-  private val threadExecutor: ThreadExecutor,
-  private val postExecutionThread: PostExecutionThread) {
+  private val backgroundScheduler: Scheduler,
+  private val foregroundScheduler: Scheduler) {
 
   private val subscription = Disposables.empty()
 
@@ -26,8 +24,8 @@ abstract class CompletableUseCase<in Params> protected constructor(
    */
   fun execute(params: Params): Completable {
     return this.buildUseCaseObservable(params)
-      .subscribeOn(Schedulers.from(threadExecutor))
-      .observeOn(postExecutionThread.scheduler)
+      .subscribeOn(backgroundScheduler)
+      .observeOn(foregroundScheduler)
   }
 
   /**

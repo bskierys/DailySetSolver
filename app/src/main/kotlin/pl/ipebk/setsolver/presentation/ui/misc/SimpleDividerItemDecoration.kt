@@ -5,7 +5,7 @@ import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
-import pl.ipebk.setsolver.presentation.ApplicationQualifier
+import pl.ipebk.setsolver.presentation.appDi.ApplicationScope
 import pl.ipebk.setsolver.R
 import javax.inject.Inject
 
@@ -15,7 +15,7 @@ import javax.inject.Inject
  * Adapted from https://gist.github.com/polbins/e37206fbc444207c0e92
  */
 class SimpleDividerItemDecoration @Inject constructor(
-  @ApplicationQualifier context: Context
+  @ApplicationScope context: Context
 ) : RecyclerView.ItemDecoration() {
 
   private val divider: Drawable? = ContextCompat.getDrawable(context, R.drawable.line_divider)

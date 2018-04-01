@@ -1,17 +1,19 @@
-package pl.ipebk.setsolver.presentation
+package pl.ipebk.setsolver.presentation.appDi
 
 import dagger.Component
+import pl.ipebk.setsolver.presentation.DailySetSolverApp
 import pl.ipebk.setsolver.presentation.data.network.NetworkModule
 import pl.ipebk.setsolver.presentation.ui.solver.SolverComponent
 import pl.ipebk.setsolver.presentation.ui.solver.SolverModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(
+@Component(modules = [
   ApplicationModule::class,
   NetworkModule::class,
-  DomainModule::class
-))
+  DomainModule::class,
+  Rx::class
+])
 interface ApplicationComponent {
 
   // Injectors

@@ -3,7 +3,7 @@ package pl.ipebk.setsolver.presentation.ui.base
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.v7.app.AppCompatActivity
-import pl.ipebk.setsolver.presentation.ApplicationComponent
+import pl.ipebk.setsolver.presentation.appDi.ApplicationComponent
 import pl.ipebk.setsolver.presentation.DailySetSolverApp
 
 abstract class BaseActivity : AppCompatActivity() {

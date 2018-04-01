@@ -4,7 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import dagger.Module
 import dagger.Provides
-import pl.ipebk.setsolver.presentation.ApplicationQualifier
+import pl.ipebk.setsolver.presentation.appDi.ApplicationScope
 import javax.inject.Singleton
 
 @Module
@@ -12,7 +12,7 @@ class NetworkModule {
 
   @Provides
   @Singleton
-  fun provideConnectivityManager(@ApplicationQualifier context: Context):
+  fun provideConnectivityManager(@ApplicationScope context: Context):
     ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE)
     as ConnectivityManager
 
