@@ -1,7 +1,9 @@
 package pl.ipebk.setsolver.presentation
 
 import android.app.Application
+import com.crashlytics.android.Crashlytics
 import dagger.Lazy
+import io.fabric.sdk.android.Fabric
 import pl.ipebk.setsolver.BuildConfig
 import pl.ipebk.setsolver.presentation.appDi.ApplicationComponent
 import pl.ipebk.setsolver.presentation.appDi.ApplicationModule
@@ -12,7 +14,7 @@ import javax.inject.Inject
 class DailySetSolverApp : Application() {
 
   @Inject
-  lateinit var debugTree: Lazy<Timber.DebugTree>
+  lateinit var timberTree: Lazy<Timber.Tree>
 
   companion object {
     lateinit var graph: ApplicationComponent
@@ -23,9 +25,10 @@ class DailySetSolverApp : Application() {
 
     initDependencyGraph()
 
-    if (BuildConfig.DEBUG) {
-      Timber.plant(debugTree.get())
+    if (!BuildConfig.DEBUG) {
+      Fabric.with(this, Crashlytics())
     }
+    Timber.plant(timberTree.get())
   }
 
   private fun initDependencyGraph() {

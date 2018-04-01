@@ -8,8 +8,8 @@
     <application
         android:name=".presentation.DailySetSolverApp"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -21,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-    </application>
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="b6da5b975f1016a9f9d5bbd45ef7244f820af050"/>
+    </application>
 </manifest>

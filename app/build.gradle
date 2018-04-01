@@ -1,4 +1,15 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -79,6 +90,10 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 dependencies {
     def mobileDependencies = rootProject.ext.mobileDependencies
 
@@ -116,6 +131,9 @@ dependencies {
     // logs
     implementation mobileDependencies.pine
     implementation mobileDependencies.timbertreeutils
+    implementation(mobileDependencies.crashlytics) {
+        transitive = true
+    }
 
     // image downloading
     implementation mobileDependencies.picasso

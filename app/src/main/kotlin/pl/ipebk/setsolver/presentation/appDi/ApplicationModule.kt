@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import com.github.bskierys.pine.Pine
 import dagger.Module
 import dagger.Provides
+import net.ypresto.timbertreeutils.CrashlyticsLogExceptionTree
+import pl.ipebk.setsolver.BuildConfig
 import pl.ipebk.setsolver.presentation.DailySetSolverApp
 import timber.log.Timber
 import javax.inject.Singleton
@@ -29,9 +31,12 @@ class ApplicationModule(private val app: DailySetSolverApp) {
   }
 
   @Provides
-  fun provideDebugTree(): Timber.DebugTree {
-    return Pine.Builder()
-      .addPackageReplacePattern(app.packageName, "SETAPP")
-      .grow()
+  fun provideTimberTree(): Timber.Tree {
+    return when (BuildConfig.DEBUG) {
+      true -> Pine.Builder()
+        .addPackageReplacePattern(app.packageName, "SETAPP")
+        .grow()
+      false -> CrashlyticsLogExceptionTree()
+    }
   }
 }

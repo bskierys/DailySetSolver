@@ -36,6 +36,7 @@ ext {
     // Logs
     pineVersion = '0.2.0'
     timberUtilsVersion = '1.0.0'
+    crashlyticsVersion = '2.9.1@aar'
     // Networking
     picassoVersion = '2.5.2'
     okhttpVersion = '3.9.1'
@@ -48,49 +49,50 @@ ext {
 
     mobileDependencies = [
             // Android
-            kotlin             : "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
-            appcompat          : "com.android.support:appcompat-v7:${androidSupportVersion}",
-            support            : "com.android.support:support-v4:${androidSupportVersion}",
-            supportFragment    : "com.android.support:support-fragment:${androidSupportVersion}",
-            design             : "com.android.support:design:${androidSupportVersion}",
-            recyclerView       : "com.android.support:recyclerview-v7:${androidSupportVersion}",
+            kotlin            : "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+            appcompat         : "com.android.support:appcompat-v7:${androidSupportVersion}",
+            support           : "com.android.support:support-v4:${androidSupportVersion}",
+            supportFragment   : "com.android.support:support-fragment:${androidSupportVersion}",
+            design            : "com.android.support:design:${androidSupportVersion}",
+            recyclerView      : "com.android.support:recyclerview-v7:${androidSupportVersion}",
 
             // RxJava
-            rxjava             : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            rxandroid          : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            rxbinding          : "com.jakewharton.rxbinding2:rxbinding:${rxBindingVersion}",
-            rxSchedulerRule    : "com.github.Plastix.RxSchedulerRule:rx2:${rxSchedulerRuleVersion}",
-            rxDelay            : "com.github.Plastix.RxDelay:rx2:${rxDelayVersion}",
+            rxjava            : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxandroid         : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            rxbinding         : "com.jakewharton.rxbinding2:rxbinding:${rxBindingVersion}",
+            rxSchedulerRule   : "com.github.Plastix.RxSchedulerRule:rx2:${rxSchedulerRuleVersion}",
+            rxDelay           : "com.github.Plastix.RxDelay:rx2:${rxDelayVersion}",
 
             // Dagger
-            daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger             : "com.google.dagger:dagger:${daggerVersion}",
-            javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
+            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger            : "com.google.dagger:dagger:${daggerVersion}",
+            javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxInject       : "javax.inject:javax.inject:${javaxInjectVersion}",
 
             // Retrofit
-            retrofit           : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            retrofitConverter  : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            retrofitRxAdapter  : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            retrofit          : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitConverter : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofitRxAdapter : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
 
             // logs
-            pine               : "com.github.bskierys.pine:pine:${pineVersion}",
-            timbertreeutils    : "net.ypresto.timbertreeutils:timbertreeutils:${timberUtilsVersion}",
+            pine              : "com.github.bskierys.pine:pine:${pineVersion}",
+            timbertreeutils   : "net.ypresto.timbertreeutils:timbertreeutils:${timberUtilsVersion}",
+            crashlytics       : "com.crashlytics.sdk.android:crashlytics:${crashlyticsVersion}",
 
             // networking
-            picasso            : "com.squareup.picasso:picasso:${picassoVersion}",
-            okhttp             : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
-            loggingInterceptor : "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}",
-            okLog              : "com.github.simonpercic:oklog3:${okLogVersion}",
-            rxNetwork          : "com.github.pwittchen:reactivenetwork-rx2:${rxNetworkVersion}",
-            jsoup              : "org.jsoup:jsoup:$jsoupVersion",
+            picasso           : "com.squareup.picasso:picasso:${picassoVersion}",
+            okhttp            : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+            loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}",
+            okLog             : "com.github.simonpercic:oklog3:${okLogVersion}",
+            rxNetwork         : "com.github.pwittchen:reactivenetwork-rx2:${rxNetworkVersion}",
+            jsoup             : "org.jsoup:jsoup:$jsoupVersion",
 
             // databinding
-            databinding        : "com.android.databinding:compiler:${databindingVersion}",
+            databinding       : "com.android.databinding:compiler:${databindingVersion}",
 
             // Unit test dependencies
-            junit              : "junit:junit:${junitVersion}",
-            mockitoTwo         : "org.mockito:mockito-core:${mockitoTwoVersion}",
-            mockitoOne         : "org.mockito:mockito-core:${mockitoOneVersion}"
+            junit             : "junit:junit:${junitVersion}",
+            mockitoTwo        : "org.mockito:mockito-core:${mockitoTwoVersion}",
+            mockitoOne        : "org.mockito:mockito-core:${mockitoOneVersion}"
     ]
 }
