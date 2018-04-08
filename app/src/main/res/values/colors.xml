@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="set_card_bg">#f7f7ff</color>
+    <color name="set_shape_red">#f54c22</color>
+    <color name="set_shape_purple">#824fee</color>
+    <color name="set_shape_green">#45c87a</color>
+
     <color name="colorPrimary">#03A9F4</color>
     <color name="colorPrimaryDark">#0288D1</color>
     <color name="colorAccent">#FF9800</color>
@@ -7,6 +12,6 @@
     <color name="gray">#9E9E9E</color>
     <color name="gray_light">#e0e0e0</color>
 
-    <drawable name="set_row_unselected_background">@android:color/white</drawable>
-    <drawable name="set_row_selected_background">@color/colorAccent</drawable>
+    <drawable name="set_row_unselected_background">@android:color/transparent</drawable>
+    <drawable name="set_row_selected_background">@color/colorPrimaryDark</drawable>
 </resources>
