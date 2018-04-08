@@ -13,7 +13,6 @@ import pl.ipebk.setsolver.R
 import pl.ipebk.setsolver.databinding.ActivitySolverBinding
 import pl.ipebk.setsolver.domain.SetSolution
 import pl.ipebk.setsolver.presentation.ui.base.ViewModelActivity
-import pl.ipebk.setsolver.presentation.ui.misc.SimpleDividerItemDecoration
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -23,9 +22,6 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
 
   @Inject
   lateinit var layoutManager: LinearLayoutManager
-
-  @Inject
-  lateinit var dividerDecorator: SimpleDividerItemDecoration
 
   private val disposables: CompositeDisposable = CompositeDisposable()
 
@@ -71,7 +67,6 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
   private fun setupRecyclerView() {
     solution.listRecyclerView.adapter = adapter
     solution.listRecyclerView.layoutManager = layoutManager
-    solution.listRecyclerView.addItemDecoration(dividerDecorator)
   }
 
   private fun showLoadingState(visible: Boolean) {
