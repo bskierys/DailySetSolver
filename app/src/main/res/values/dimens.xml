@@ -13,8 +13,10 @@
     <dimen name="cards_row_height">78dp</dimen>
 
     <dimen name="solver_loading_margin">16dp</dimen>
-    <dimen name="header_text_size">16sp</dimen>
+    <dimen name="solver_size_check_width">8dp</dimen>
+
     <dimen name="header_margin_top">28dp</dimen>
     <dimen name="header_margin_bottom">36dp</dimen>
+    <dimen name="header_text_size">16sp</dimen>
     <dimen name="body_text_size">14sp</dimen>
 </resources>

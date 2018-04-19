@@ -16,7 +16,7 @@
         tools:ignore="contentDescription">
         
         <FrameLayout
-            android:layout_width="8dp"
+            android:layout_width="@dimen/solver_size_check_width"
             tools:background="@color/colorPrimaryDark"
             android:background="@{viewModel.selected ? @drawable/set_row_selected_background : @drawable/set_row_unselected_background}"
             android:layout_height="@dimen/cards_row_height"/>
