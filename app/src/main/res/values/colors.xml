@@ -9,6 +9,8 @@
     <color name="colorPrimaryDark">#0288D1</color>
     <color name="colorAccent">#FF9800</color>
 
+    <color name="cool_grey">#9091a5</color>
+    <color name="slate_grey">#65667b</color>
     <color name="gray">#9E9E9E</color>
     <color name="gray_light">#e0e0e0</color>
 

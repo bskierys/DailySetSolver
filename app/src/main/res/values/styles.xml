@@ -17,4 +17,31 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <style name="Text_Header">
+        <item name="fontFamily">@font/gotham_book_family</item>
+        <item name="android:textColor">@color/cool_grey</item>
+        <item name="android:textSize">@dimen/header_text_size</item>
+    </style>
+
+    <style name="Text_Header_Emphasis">
+        <item name="fontFamily">@font/gotham_medium_family</item>
+        <item name="android:textColor">@color/slate_grey</item>
+        <item name="android:textSize">@dimen/header_text_size</item>
+    </style>
+
+    <style name="Text_Body">
+        <item name="fontFamily">@font/gotham_medium_family</item>
+        <item name="android:textColor">@color/cool_grey</item>
+        <item name="android:textSize">@dimen/body_text_size</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
+    <style name="Text_Body.Light" parent="Text_Body">
+        <item name="fontFamily">@font/gotham_book_family</item>
+        <item name="android:textColor">@color/slate_grey</item>
+    </style>
+
+    <style name="Text_Body.Light.Emphasis" parent="Text_Body.Light">
+        <item name="fontFamily">@font/gotham_medium_family</item>
+    </style>
 </resources>
