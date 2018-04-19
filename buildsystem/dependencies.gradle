@@ -20,6 +20,7 @@ ext {
     // Android
     androidSupportVersion = '27.0.2'
     databindingVersion = '2.3.3'
+    constraintLayoutVersion = '1.0.2'
     // RxJava
     rxJavaVersion = '2.1.10'
     rxAndroidVersion = '2.0.2'
@@ -55,6 +56,7 @@ ext {
             supportFragment   : "com.android.support:support-fragment:${androidSupportVersion}",
             design            : "com.android.support:design:${androidSupportVersion}",
             recyclerView      : "com.android.support:recyclerview-v7:${androidSupportVersion}",
+            constraintLayout  : "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
 
             // RxJava
             rxjava            : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",

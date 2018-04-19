@@ -12,7 +12,8 @@
     <dimen name="cards_row_margin_vertical">12dp</dimen>
     <dimen name="cards_row_height">78dp</dimen>
 
-    <dimen name="solver_loading_margin">16dp</dimen>
+    <dimen name="solver_loading_margin">36dp</dimen>
+    <dimen name="solver_loading_size">64dp</dimen>
     <dimen name="solver_size_check_width">8dp</dimen>
 
     <dimen name="header_margin_top">28dp</dimen>

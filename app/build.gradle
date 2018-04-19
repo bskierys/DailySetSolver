@@ -111,6 +111,7 @@ dependencies {
     implementation mobileDependencies.appcompat
     implementation mobileDependencies.design
     implementation mobileDependencies.recyclerView
+    implementation mobileDependencies.constraintLayout
 
     // RxJava
     implementation mobileDependencies.rxjava
