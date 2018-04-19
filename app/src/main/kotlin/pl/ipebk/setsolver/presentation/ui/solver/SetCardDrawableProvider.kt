@@ -31,12 +31,20 @@ class SetCardDrawableProvider @Inject constructor(private val context: Context) 
   private var shapePaint = Paint(Paint.ANTI_ALIAS_FLAG)
   private val backgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = backgroundColor }
 
+  private var isInitialized = false
+
   init {
     drawSpace = RectF(
       cardShapesMargin.toFloat(),
       cardShapesMargin.toFloat(),
       cardWidth.toFloat() - cardShapesMargin,
       cardHeight.toFloat() - cardShapesMargin)
+  }
+
+  private fun initialize() {
+    if(isInitialized) {
+      return
+    }
 
     val desiredHeight = drawSpace.height()
 
@@ -60,6 +68,8 @@ class SetCardDrawableProvider @Inject constructor(private val context: Context) 
       put(shapeIdentifierFor(Symbol.SQUIGGLE, Shading.OUTLINED),
         scaledBitmapFromVectorDrawable(R.drawable.sh_squiggle_outlined, desiredHeight))
     }
+
+    isInitialized = true
   }
 
   private fun scaledBitmapFromVectorDrawable(id: Int, desiredHeight: Float): Bitmap {
@@ -88,6 +98,10 @@ class SetCardDrawableProvider @Inject constructor(private val context: Context) 
    * @return [Drawable] to represent card on the screen
    */
   fun provideCardDrawable(card: SetCard): Drawable? {
+    if(!isInitialized) {
+      initialize()
+    }
+
     val bitmap = Bitmap.createBitmap(cardWidth, cardHeight, Bitmap.Config.ARGB_8888)
     val c = canvas
     c.setBitmap(bitmap)
