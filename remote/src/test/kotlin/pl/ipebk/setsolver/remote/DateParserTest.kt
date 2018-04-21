@@ -17,7 +17,8 @@ class DateParserTest {
     val date = "April 1, 2018"
     val fullDate = "Saturday, $date"
 
-    Assert.assertEquals(date, parser.findDate(fullDate))
+    val expected = Date(118,3,1)
+    Assert.assertEquals(expected, parser.parseDate(fullDate))
   }
 
   @Test
@@ -25,7 +26,8 @@ class DateParserTest {
     val date = "September 28, 2018"
     val fullDate = "Monday, $date"
 
-    Assert.assertEquals(date, parser.findDate(fullDate))
+    val expected = Date(118,8,28)
+    Assert.assertEquals(expected, parser.parseDate(fullDate))
   }
 
   @Test
@@ -34,7 +36,8 @@ class DateParserTest {
     val fullDate = "Saturday, $date"
     val test = "Lorem ipsum dolor :$fullDate<> as DateGif"
 
-    Assert.assertEquals(date, parser.findDate(test))
+    val expected = Date(118,3,1)
+    Assert.assertEquals(expected, parser.parseDate(test))
   }
 
   @Test
@@ -43,7 +46,7 @@ class DateParserTest {
     val fullDate = "Fredas, $date"
 
     exception.expect(IllegalArgumentException::class.java)
-    parser.findDate(fullDate)
+    parser.parseDate(fullDate)
   }
 
   @Test
@@ -52,7 +55,7 @@ class DateParserTest {
     val fullDate = "Monday, $date"
 
     exception.expect(IllegalArgumentException::class.java)
-    parser.findDate(fullDate)
+    parser.parseDate(fullDate)
   }
 
   @Test
@@ -61,7 +64,7 @@ class DateParserTest {
     val fullDate = "Monday, $date"
 
     exception.expect(IllegalArgumentException::class.java)
-    parser.findDate(fullDate)
+    parser.parseDate(fullDate)
   }
 
   @Test
@@ -70,31 +73,6 @@ class DateParserTest {
     val fullDate = "Monday, $date"
 
     exception.expect(IllegalArgumentException::class.java)
-    parser.findDate(fullDate)
-  }
-
-  @Test
-  fun `should parse one-digit date`() {
-    val test = "Monday, April 5, 2018"
-
-    val expected = Date(118,3,5)
-    Assert.assertEquals(expected, parser.parseDate(test))
-  }
-
-  @Test
-  fun `should parse two-digit date`() {
-    val test = "Monday, September 25, 2018"
-
-    val expected = Date(118,8,25)
-    Assert.assertEquals(expected, parser.parseDate(test))
-  }
-
-  @Test
-  fun `should parse date from noise`() {
-    val date = "Saturday, June 1, 2018"
-    val test = "Lorem ipsum dolor :$date<> as DateGif"
-
-    val expected = Date(118,5,1)
-    Assert.assertEquals(expected, parser.parseDate(test))
+    parser.parseDate(fullDate)
   }
 }

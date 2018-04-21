@@ -4,20 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="pl.ipebk.setsolver.presentation.ui.solver.HeaderViewModel"/>
     </data>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/header_margin_top"
         android:layout_marginBottom="@dimen/header_margin_bottom"
         android:layout_marginLeft="@dimen/app_margin_horizontal"
         android:layout_marginRight="@dimen/app_margin_horizontal"
-        style="@style/Text_Header"
-        tools:text="@string/solver_header"
-        android:text="@{viewModel.header}"/>
+        android:layout_marginTop="@dimen/header_margin_top">
+
+        <TextView
+            style="@style/Text_Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/solver_header"/>
+
+        <TextView
+            style="@style/Text_Header_Emphasis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/solver_size_header_space"
+            android:layout_marginStart="@dimen/solver_size_header_space"
+            android:text="@{viewModel.puzzleDate}"
+            tools:text="@string/preview_date"/>
+    </LinearLayout>
 </layout>
 

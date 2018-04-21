@@ -9,5 +9,5 @@ interface DailySetEngine {
   /**
    * Find sets within given cards
    */
-  fun getSolution(cards: List<SetCard>) : Single<SetSolution>
+  fun getSolution(puzzle: SetPuzzle) : Single<SetSolution>
 }

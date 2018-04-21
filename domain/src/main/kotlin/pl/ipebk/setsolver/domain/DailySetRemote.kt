@@ -10,5 +10,5 @@ interface DailySetRemote {
   /**
    * Retrieve daily puzzle from remote
    */
-  fun getPuzzleCards() : Single<List<SetCard>>
+  fun getPuzzleCards() : Single<SetPuzzle>
 }

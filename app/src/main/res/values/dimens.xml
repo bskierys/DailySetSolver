@@ -15,6 +15,7 @@
     <dimen name="solver_loading_margin">36dp</dimen>
     <dimen name="solver_loading_size">64dp</dimen>
     <dimen name="solver_size_check_width">8dp</dimen>
+    <dimen name="solver_size_header_space">6dp</dimen>
 
     <dimen name="header_margin_top">28dp</dimen>
     <dimen name="header_margin_bottom">36dp</dimen>

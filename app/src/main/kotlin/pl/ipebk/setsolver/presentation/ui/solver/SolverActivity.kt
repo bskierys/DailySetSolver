@@ -84,7 +84,7 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
     loading.visibility = View.INVISIBLE
     solution.visibility = View.VISIBLE
 
-    adapter.updateSets(setSolution.sets)
+    adapter.updateSets(setSolution.puzzleDate, setSolution.sets)
   }
 
   private fun showErrorState(message: String) {

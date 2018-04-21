@@ -35,7 +35,7 @@ internal class DateParser {
     return dateFormat.parse(dateRepresentation)
   }
 
-  internal fun findDate(source: String): String {
+  private fun findDate(source: String): String {
     val dates = arrayListOf<String>()
     val matcher = FIND_DATE_PATTERN.matcher(source)
     while (matcher.find()) {

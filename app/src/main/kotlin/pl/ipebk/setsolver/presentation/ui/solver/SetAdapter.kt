@@ -10,6 +10,8 @@ import pl.ipebk.setsolver.databinding.ItemHeaderBinding
 import pl.ipebk.setsolver.databinding.ItemSetBinding
 import pl.ipebk.setsolver.domain.SetCardThreePack
 import pl.ipebk.setsolver.presentation.ui.ActivityScope
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @ActivityScope
@@ -17,14 +19,19 @@ class SetAdapter @Inject constructor(
   private val drawableProvider: SetCardDrawableProvider,
   private val resources: Resources) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-  companion object {
+  private companion object {
     const val TYPE_HEADER = 0
     const val TYPE_ITEM = 1
+
+    // locale will appear only in english
+    val DATE_FORMAT = SimpleDateFormat("MMMM dd, yyyy", Locale.US)
   }
 
+  private var puzzleDate: Date? = null
   private var sets: List<SetCardThreePack> = emptyList()
 
-  fun updateSets(sets: List<SetCardThreePack>) {
+  fun updateSets(puzzleDate: Date, sets: List<SetCardThreePack>) {
+    this.puzzleDate = puzzleDate
     this.sets = emptyList()
     this.sets += sets
 
@@ -107,7 +114,11 @@ class SetAdapter @Inject constructor(
     viewModel?.unbind()
 
     // Create new ViewModel, set it, and bind it
-    viewModel = HeaderViewModel(resources.getString(R.string.solver_header))
+    val dateText = if (puzzleDate == null)
+      resources.getString(R.string.solver_header_empty_date)
+    else DATE_FORMAT.format(puzzleDate)
+
+    viewModel = HeaderViewModel(dateText)
     binding.viewModel = viewModel
     viewModel.bind()
   }

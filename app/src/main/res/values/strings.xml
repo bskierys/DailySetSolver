@@ -5,5 +5,8 @@
     <string name="solver_generic_error">Could not download puzzle</string>
     <string name="solver_error_network">Problem with Internet connection</string>
     <string name="solver_error_generic">Could not download or solve puzzle</string>
-    <string name="solver_header">Today\'s Daily Set Game Solution:</string>
+    <string name="solver_header">Solution for: </string>
+    <string name="solver_header_empty_date">&#8230;</string>
+
+    <string name="preview_date" translatable="false">April 6, 2018</string>
 </resources>
