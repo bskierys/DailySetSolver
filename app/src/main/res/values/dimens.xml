@@ -6,10 +6,11 @@
 
     <dimen name="card_height">54dp</dimen>
     <dimen name="card_width">80dp</dimen>
-    <dimen name="card_radius">6dp</dimen>
     <dimen name="card_shapes_margin">14dp</dimen>
+    <dimen name="card_radius">6dp</dimen>
 
     <dimen name="cards_row_margin_vertical">12dp</dimen>
+    <dimen name="cards_row_margin_horizontal">0dp</dimen>
     <dimen name="cards_row_height">78dp</dimen>
 
     <dimen name="solver_loading_margin">36dp</dimen>
