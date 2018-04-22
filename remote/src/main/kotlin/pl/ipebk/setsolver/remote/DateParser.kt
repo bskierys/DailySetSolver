@@ -17,7 +17,7 @@ internal class DateParser {
         "June|July|August|" +
         "September|October|November"
 
-    const val DAY_OF_MONTH = "[1-9]|1[0-9]|2[0-9]|3[0-1]"
+    const val DAY_OF_MONTH = "0[1-9]|[1-9]|1[0-9]|2[0-9]|3[0-1]"
     const val DATE_REGEX = "($DAY_OF_WEEK), ($MONTH) ($DAY_OF_MONTH), (\\d{4})"
     val FIND_DATE_PATTERN: Pattern = Pattern.compile(DATE_REGEX)
     val dateFormat = SimpleDateFormat("MMMM dd, yyyy", Locale.US)

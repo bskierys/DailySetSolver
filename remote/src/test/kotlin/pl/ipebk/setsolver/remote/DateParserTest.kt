@@ -4,6 +4,7 @@ import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
+import java.text.SimpleDateFormat
 import java.util.*
 
 class DateParserTest {
@@ -74,5 +75,17 @@ class DateParserTest {
 
     exception.expect(IllegalArgumentException::class.java)
     parser.parseDate(fullDate)
+  }
+
+  @Test
+  fun `should find date of every month`() {
+    val dateFormat = SimpleDateFormat("MMMM dd, yyyy", Locale.US)
+
+    for(i in 0..11) {
+      val date = Date(118, i, 2)
+      val dateText = "some distraction,Monday, ${dateFormat.format(date)}<div>"
+
+      Assert.assertEquals(date, parser.parseDate(dateText))
+    }
   }
 }
