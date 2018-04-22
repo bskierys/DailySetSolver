@@ -9,12 +9,15 @@ import pl.ipebk.setsolver.domain.*
 import pl.ipebk.solver.Card
 import pl.ipebk.solver.Set
 import pl.ipebk.solver.SetGameSolver
+import java.util.*
 
 class DailySetEngineImplTest {
   @Mock
   private lateinit var mapper: CardMapper
   @Mock
   private lateinit var solver: SetGameSolver
+  @Mock
+  private lateinit var fakeDate: Date
 
   private lateinit var engine: DailySetEngineImpl
 
@@ -48,7 +51,7 @@ class DailySetEngineImplTest {
 
     val cards = arrayListOf(generateSimpleDomainCard())
 
-    val testObserver = engine.getSolution(cards).test()
+    val testObserver = engine.getSolution(SetPuzzle(fakeDate, cards)).test()
     testObserver
       .assertComplete()
       .assertValue { it.sets.isNotEmpty() }
@@ -64,7 +67,7 @@ class DailySetEngineImplTest {
 
     val cards = arrayListOf(generateSimpleDomainCard())
 
-    val testObserver = engine.getSolution(cards).test()
+    val testObserver = engine.getSolution(SetPuzzle(fakeDate, cards)).test()
     testObserver.assertError(ArrayIndexOutOfBoundsException::class.java)
     Mockito.verify(solver).findSolution(any())
   }
