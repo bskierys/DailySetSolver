@@ -18,8 +18,13 @@
     <dimen name="solver_size_check_width">8dp</dimen>
     <dimen name="solver_size_header_space">6dp</dimen>
 
+    <dimen name="error_screen_padding">72dp</dimen>
+    <dimen name="error_screen_spacing">54dp</dimen>
+
     <dimen name="header_margin_top">28dp</dimen>
     <dimen name="header_margin_bottom">36dp</dimen>
     <dimen name="header_text_size">16sp</dimen>
     <dimen name="body_text_size">14sp</dimen>
+    <dimen name="button_radius">2dp</dimen>
+    <dimen name="button_padding">48dp</dimen>
 </resources>

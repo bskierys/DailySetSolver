@@ -36,6 +36,8 @@
         <item name="android:lineSpacingExtra">6sp</item>
     </style>
 
+    <style name="Text_Button" parent="Text_Body"/>
+
     <style name="Text_Body.Light" parent="Text_Body">
         <item name="fontFamily">@font/gotham_book_family</item>
         <item name="android:textColor">@color/slate_grey</item>

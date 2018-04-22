@@ -1,25 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:fillViewport="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/solver_loading_margin"
-        android:indeterminate="true"
-        app:srcCompat="@drawable/ic_error_outline_black_48dp"
-        tools:ignore="contentDescription"/>
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/error_screen_padding"
+        android:paddingRight="@dimen/error_screen_padding"
+        android:paddingTop="@dimen/error_screen_padding"
+        android:paddingBottom="@dimen/error_screen_padding">
 
-    <TextView
-        style="@style/Text_Body"
-        android:id="@+id/error_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/solver_generic_error"/>
-</LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/error_screen_spacing"
+            app:srcCompat="@drawable/error_image"
+            tools:ignore="contentDescription"/>
+
+        <TextView
+            android:id="@+id/error_message"
+            style="@style/Text_Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/error_screen_spacing"
+            android:gravity="center_horizontal"
+            android:text="@string/solver_error_generic"/>
+
+        <Button
+            android:id="@+id/btn_retry"
+            style="@style/Text_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_primary"
+            android:paddingLeft="@dimen/button_padding"
+            android:paddingRight="@dimen/button_padding"
+            android:text="@string/error_button_retry"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+</ScrollView>
+

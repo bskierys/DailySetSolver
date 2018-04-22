@@ -17,6 +17,11 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>() {
+
+  private companion object {
+    const val RETRY_DELAY_TIME = 1000L
+  }
+
   @Inject
   lateinit var adapter: SetAdapter
 
@@ -36,6 +41,11 @@ class SolverActivity : ViewModelActivity<SolverViewModel, ActivitySolverBinding>
 
     error.visibility = View.INVISIBLE
     setupRecyclerView()
+    error.btn_retry.setOnClickListener {
+      error.visibility = View.INVISIBLE
+      loading.visibility = View.VISIBLE
+      it.postDelayed({viewModel.fetchAndSolveDaily()}, RETRY_DELAY_TIME)
+    }
 
     viewModel.fetchAndSolveDaily()
 

@@ -2,9 +2,11 @@
     <string name="app_name">Set Solver</string>
 
     <string name="solver_loading">Loading puzzle solution\nPlease wait&#8230;</string>
-    <string name="solver_generic_error">Could not download puzzle</string>
-    <string name="solver_error_network">Problem with Internet connection</string>
-    <string name="solver_error_generic">Could not download or solve puzzle</string>
+    <string name="solver_error_network">Could not download today\'s puzzle.\n\nPlease check your
+        Internet connection.</string>
+    <string name="solver_error_generic">An unknown error occurred while solving puzzle.\n\nPlease check your
+        Internet connection.</string>
+    <string name="error_button_retry">Retry</string>
     <string name="solver_header">Solution for: </string>
     <string name="solver_header_empty_date">&#8230;</string>
 
